@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/title-theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/Title.cs" type="Script" id=2]
@@ -8,10 +8,14 @@
 [ext_resource path="res://ui/map/earth.png" type="Texture" id=6]
 [ext_resource path="res://ui/map/sun.png" type="Texture" id=7]
 
+[sub_resource type="Gradient" id=1]
+
 [node name="MainMenu" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 301, 238 )
 focus_mode = 2
+mouse_filter = 0
 theme = ExtResource( 3 )
 script = ExtResource( 5 )
 
@@ -30,8 +34,15 @@ margin_top = 55.0
 margin_right = 480.0
 margin_bottom = 65.0
 rect_min_size = Vector2( 0, 10 )
+mouse_filter = 1
 
 [node name="CelestialBodies" type="Node2D" parent="."]
+
+[node name="FlightLine" type="Line2D" parent="CelestialBodies"]
+visible = false
+points = PoolVector2Array( 22, 254, 110, 244 )
+width = 3.0
+gradient = SubResource( 1 )
 
 [node name="Earth" parent="CelestialBodies" instance=ExtResource( 4 )]
 position = Vector2( 19, 252 )
