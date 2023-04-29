@@ -43,7 +43,7 @@ public class Global : Node
 
     public static string CurrentLocation = "Earth";
     public static string TargetLocation = CurrentLocation;
-    public static float DistanceToTarget = 0f;
+    public static float DistanceToTarget = 60f;
 
     public static int MaxHp = 3;
 

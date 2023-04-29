@@ -1,16 +1,28 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://environment/Game.cs" type="Script" id=1]
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/Hud.cs" type="Script" id=3]
 [ext_resource path="res://ui/main-menu-theme.tres" type="Theme" id=4]
 [ext_resource path="res://scenes/Flight.cs" type="Script" id=5]
+[ext_resource path="res://entities/obstacle/Obstacle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/obstacle/ObstacleSmall.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/obstacle/ObstacleBig.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 148 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 272, 18 )
+
+[sub_resource type="OpenSimplexNoise" id=6]
+octaves = 1
+period = 118.9
+
+[sub_resource type="NoiseTexture" id=7]
+width = 480
+height = 270
+noise = SubResource( 6 )
 
 [node name="Flight" type="Node2D"]
 pause_mode = 2
@@ -19,6 +31,9 @@ script = ExtResource( 5 )
 [node name="Game" type="Node2D" parent="."]
 pause_mode = 1
 script = ExtResource( 1 )
+smallObstacleScene = ExtResource( 7 )
+obstacleScene = ExtResource( 6 )
+bigObstacleScene = ExtResource( 8 )
 
 [node name="Hud" type="CanvasLayer" parent="Game"]
 script = ExtResource( 3 )
@@ -80,6 +95,25 @@ shape = SubResource( 2 )
 position = Vector2( 240, 296 )
 shape = SubResource( 2 )
 
+[node name="Obstacles" type="Node2D" parent="Game"]
+
+[node name="SmallObstacleCreationTimer2" type="Timer" parent="Game/Obstacles"]
+wait_time = 0.1
+autostart = true
+
+[node name="ObstacleCreationTimer" type="Timer" parent="Game/Obstacles"]
+wait_time = 0.4
+autostart = true
+
+[node name="BigObstacleCreationTimer3" type="Timer" parent="Game/Obstacles"]
+wait_time = 2.0
+autostart = true
+
+[node name="ObstacleNoise" type="Sprite" parent="Game/Obstacles"]
+self_modulate = Color( 1, 1, 1, 0.235294 )
+texture = SubResource( 7 )
+centered = false
+
 [node name="ButtonLayer" type="CanvasLayer" parent="."]
 
 [node name="Buttons" type="VBoxContainer" parent="ButtonLayer"]
@@ -108,4 +142,7 @@ flat = true
 [connection signal="timeout" from="Game/Hud/DestinationTimer" to="." method="_on_DestinationTimer_timeout"]
 [connection signal="timeout" from="Game/Hud/RefreshTimer" to="Game/Hud" method="_on_RefreshTimer_timeout"]
 [connection signal="HpChanged" from="Game/Player" to="Game/Hud" method="_on_Player_HpChanged"]
+[connection signal="timeout" from="Game/Obstacles/SmallObstacleCreationTimer2" to="Game" method="_on_SmallObstacleCreationTimer_timeout"]
+[connection signal="timeout" from="Game/Obstacles/ObstacleCreationTimer" to="Game" method="_on_ObstacleCreationTimer_timeout"]
+[connection signal="timeout" from="Game/Obstacles/BigObstacleCreationTimer3" to="Game" method="_on_BigObstacleCreationTimer_timeout"]
 [connection signal="pressed" from="ButtonLayer/Buttons/HBoxContainer/AbortButton" to="." method="_on_AbortButton_pressed"]

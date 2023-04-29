@@ -24,9 +24,10 @@
 - [x] 💙 Player in the flight scene
 - [x] 💙 The flight scene has a timer/distance meter, the length of which depends on the length of the path
 - [x] 💙 HP (replenished upon arrival)
-- [ ] 💙 Obstacles
+- [x] 💙 Obstacles
 - [ ] 💙 Suncake pickups
 - [ ] 💙 Shoot to destroy obstacles
+- [ ] 💙 Go back when the player's HP reaches 0 - give XP
 - [ ] 💙 Button that takes the player from the map scene to the upgrade scene (which is just )
 - [ ] 💙 Fire speed upgrade
 - [ ] 💙 Fire power upgrade
