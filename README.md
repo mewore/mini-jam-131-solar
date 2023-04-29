@@ -19,7 +19,7 @@
 
 ### MVP
 
-- [ ] 💙 Main menu - celestial map scene (this will also serve as the main menu)
+- [x] 💙 Main menu - celestial map scene (this will also serve as the main menu)
 - [ ] 💙 Going from one star to another - flight scene
 - [ ] 💙 Player in the flight scene
 - [ ] 💙 The flight scene has a timer/distance meter, the length of which depends on the length of the path

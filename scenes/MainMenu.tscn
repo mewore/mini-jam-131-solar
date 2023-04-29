@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/title-theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/Title.cs" type="Script" id=2]
 [ext_resource path="res://ui/main-menu-theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/map/CelestialBody.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/MainMenu.cs" type="Script" id=5]
+[ext_resource path="res://ui/map/earth.png" type="Texture" id=6]
+[ext_resource path="res://ui/map/sun.png" type="Texture" id=7]
 
 [node name="MainMenu" type="VBoxContainer"]
 anchor_right = 1.0
@@ -27,3 +30,71 @@ margin_top = 55.0
 margin_right = 480.0
 margin_bottom = 65.0
 rect_min_size = Vector2( 0, 10 )
+
+[node name="CelestialBodies" type="Node2D" parent="."]
+
+[node name="Earth" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 19, 252 )
+
+[node name="Sprite" parent="CelestialBodies/Earth" index="0"]
+texture = ExtResource( 6 )
+
+[node name="Sun" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 457, 22 )
+
+[node name="Sprite" parent="CelestialBodies/Sun" index="0"]
+texture = ExtResource( 7 )
+
+[node name="CelestialBody" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 110, 244 )
+
+[node name="CelestialBody2" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 22, 188 )
+
+[node name="CelestialBody3" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 73, 124 )
+
+[node name="CelestialBody4" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 195, 183 )
+
+[node name="CelestialBody5" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 128, 21 )
+
+[node name="CelestialBody6" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 275, 116 )
+
+[node name="CelestialBody7" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 355, 246 )
+
+[node name="CelestialBody8" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 433, 224 )
+
+[node name="CelestialBody9" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 370, 165 )
+
+[node name="CelestialBody10" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 430, 106 )
+
+[node name="CelestialBody11" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 353, 33 )
+
+[node name="CelestialBody12" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 286, 205 )
+
+[node name="CelestialBody13" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 212, 105 )
+
+[node name="CelestialBody14" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 51, 57 )
+
+[node name="CelestialBody15" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 190, 246 )
+
+[node name="CelestialBody16" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 309, 163 )
+
+[node name="CelestialBody17" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 309, 163 )
+
+[editable path="CelestialBodies/Earth"]
+[editable path="CelestialBodies/Sun"]
