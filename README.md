@@ -15,7 +15,7 @@
     - While travelling, the player has to dodge debris and enemy projectiles, but since the focus is on the story, it
       won't be too challenging.
     - Boss fights when a certain difficulty is reached. The player starts at the bottom-left and has to reach the top-left (where the Sun is) and the difficulty increases diagonally in that direction... like this:
-  ![solar-game-path-concept.png](./blob/main/solar-game-path-concept.png?raw=true)
+  ![solar-game-path-concept.png](../../blob/main/solar-game-path-concept.png?raw=true)
 
 ### MVP
 
