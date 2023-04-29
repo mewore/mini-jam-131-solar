@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ui/title-theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/Title.cs" type="Script" id=2]
+[ext_resource path="res://ui/main-menu-theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/CustomButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/MainMenu.cs" type="Script" id=5]
+
+[node name="MainMenu" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 2
+theme = ExtResource( 3 )
+script = ExtResource( 5 )
+customButtonScene = ExtResource( 4 )
+
+[node name="Title" type="Label" parent="."]
+margin_right = 320.0
+margin_bottom = 51.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.831373, 0.443137, 0.364706, 1 )
+text = "Title
+Title2"
+align = 1
+script = ExtResource( 2 )
+
+[node name="Margin" type="Control" parent="."]
+margin_top = 55.0
+margin_right = 320.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 0, 10 )
