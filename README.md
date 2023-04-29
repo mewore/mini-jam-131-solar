@@ -23,7 +23,7 @@
 - [x] 💙 Going from one star to another - flight scene
 - [x] 💙 Player in the flight scene
 - [x] 💙 The flight scene has a timer/distance meter, the length of which depends on the length of the path
-- [ ] 💙 HP (replenished upon arrival)
+- [x] 💙 HP (replenished upon arrival)
 - [ ] 💙 Obstacles
 - [ ] 💙 Suncake pickups
 - [ ] 💙 Shoot to destroy obstacles
@@ -36,6 +36,7 @@
 
 ### Basic features
 
+- [ ] 💙 Pause menu
 - [ ] 💙 Show some info when navigating in the celestial map
 - [ ] 💙 Limited ammo
 - [ ] 💙 Ammo count upgrade
@@ -45,7 +46,8 @@
 - [ ] 💜 Flight scene environment background
 - [ ] 💜 Celestial body sprite(s)
 - [ ] 💜 Projectile sprite
-- [ ] 💜 Suncakes
+- [ ] 💜 Obstacle (meteorite?) sprite
+- [ ] 💜 Suncake sprite
 - [ ] 💛 Choose flight destination SFX
 - [ ] 💛 Navigate to/from upgrade scene SFX
 - [ ] 💛 Teleport to beginning SFX

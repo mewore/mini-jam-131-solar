@@ -42,7 +42,7 @@ theme = ExtResource( 4 )
 custom_colors/font_color = Color( 0.0196078, 0.913725, 1, 0.321569 )
 custom_constants/line_spacing = 5
 text = "Distance to destination:
-<TIME_LEFT>m"
+<TIME_LEFT> km"
 align = 1
 
 [node name="DestinationTimer" type="Timer" parent="Game/Hud"]
@@ -50,6 +50,14 @@ one_shot = true
 
 [node name="RefreshTimer" type="Timer" parent="Game/Hud"]
 autostart = true
+
+[node name="HpLabel" type="Label" parent="Game/Hud"]
+margin_left = 2.0
+margin_top = 18.0
+margin_right = 150.0
+margin_bottom = 32.0
+theme = ExtResource( 4 )
+text = "HP: _/_"
 
 [node name="Player" parent="Game" instance=ExtResource( 2 )]
 position = Vector2( 54, 135 )
@@ -77,14 +85,15 @@ shape = SubResource( 2 )
 [node name="Buttons" type="VBoxContainer" parent="ButtonLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 198.0
 rect_min_size = Vector2( 480, 0 )
 theme = ExtResource( 4 )
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ButtonLayer/Buttons"]
-margin_top = 254.0
+margin_top = 56.0
 margin_right = 480.0
-margin_bottom = 270.0
+margin_bottom = 72.0
 alignment = 2
 
 [node name="AbortButton" type="Button" parent="ButtonLayer/Buttons/HBoxContainer"]
@@ -98,4 +107,5 @@ flat = true
 
 [connection signal="timeout" from="Game/Hud/DestinationTimer" to="." method="_on_DestinationTimer_timeout"]
 [connection signal="timeout" from="Game/Hud/RefreshTimer" to="Game/Hud" method="_on_RefreshTimer_timeout"]
+[connection signal="HpChanged" from="Game/Player" to="Game/Hud" method="_on_Player_HpChanged"]
 [connection signal="pressed" from="ButtonLayer/Buttons/HBoxContainer/AbortButton" to="." method="_on_AbortButton_pressed"]

@@ -3,6 +3,10 @@ using System;
 
 public class Player : KinematicBody2D
 {
+    [Signal]
+    public delegate void HpChanged(int newHp);
+
+
     private Vector2 velocity = Vector2.Zero;
 
     // Movement
@@ -14,6 +18,14 @@ public class Player : KinematicBody2D
 
     [Export(PropertyHint.Range, "(0,1)")]
     private float sneakSpeed = .5f;
+
+    private int hp = Global.MaxHp;
+    public int Hp => hp;
+
+    public override void _Ready()
+    {
+        EmitSignal(nameof(HpChanged), hp);
+    }
 
     public void Move(float delta, bool canControl = true)
     {

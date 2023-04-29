@@ -45,6 +45,8 @@ public class Global : Node
     public static string TargetLocation = CurrentLocation;
     public static float DistanceToTarget = 0f;
 
+    public static int MaxHp = 3;
+
     public override void _Ready()
     {
         // if (save_file_exists(SETTINGS_SAVE_FILE))

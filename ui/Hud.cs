@@ -9,6 +9,8 @@ public class Hud : CanvasLayer
 
     private Line2D timerLine;
 
+    private Label hpLabel;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -18,6 +20,8 @@ public class Hud : CanvasLayer
         timerLine = GetNode<Line2D>("TimerOutline/TimerInner");
         updateTimerLine();
         updateTimerText();
+
+        hpLabel = GetNode<Label>("HpLabel");
     }
 
     public override void _Process(float delta)
@@ -36,4 +40,9 @@ public class Hud : CanvasLayer
     }
 
     public void _on_RefreshTimer_timeout() => updateTimerText();
+
+    public void _on_Player_HpChanged(int newHp)
+    {
+        hpLabel.Text = String.Format("HP: {0}/{1}", newHp, Global.MaxHp);
+    }
 }
