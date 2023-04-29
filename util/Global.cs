@@ -41,6 +41,10 @@ public class Global : Node
 
     public static bool ReturningToMenu = false;
 
+    public static string CurrentLocation = "Earth";
+    public static string TargetLocation = CurrentLocation;
+    public static float DistanceToTarget = 0f;
+
     public override void _Ready()
     {
         // if (save_file_exists(SETTINGS_SAVE_FILE))

@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://environment/Game.cs" type="Script" id=1]
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/Hud.cs" type="Script" id=3]
+[ext_resource path="res://ui/main-menu-theme.tres" type="Theme" id=4]
+[ext_resource path="res://scenes/Flight.cs" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 148 )
@@ -10,9 +13,43 @@ extents = Vector2( 16, 148 )
 extents = Vector2( 272, 18 )
 
 [node name="Flight" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 5 )
 
 [node name="Game" type="Node2D" parent="."]
+pause_mode = 1
 script = ExtResource( 1 )
+
+[node name="Hud" type="CanvasLayer" parent="Game"]
+script = ExtResource( 3 )
+
+[node name="TimerOutline" type="Line2D" parent="Game/Hud"]
+position = Vector2( -3, 5 )
+points = PoolVector2Array( 0, 8, 480, 8 )
+default_color = Color( 0.0941176, 0.101961, 0.156863, 1 )
+
+[node name="TimerInner" type="Line2D" parent="Game/Hud/TimerOutline"]
+points = PoolVector2Array( 0, 8, 480, 8 )
+width = 5.0
+default_color = Color( 0.294118, 0.933333, 1, 1 )
+
+[node name="TimerLabel" type="Label" parent="Game/Hud"]
+margin_left = -3.0
+margin_top = 1.0
+margin_right = 477.0
+margin_bottom = 37.0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0.0196078, 0.913725, 1, 0.321569 )
+custom_constants/line_spacing = 5
+text = "Distance to destination:
+<TIME_LEFT>m"
+align = 1
+
+[node name="DestinationTimer" type="Timer" parent="Game/Hud"]
+one_shot = true
+
+[node name="RefreshTimer" type="Timer" parent="Game/Hud"]
+autostart = true
 
 [node name="Player" parent="Game" instance=ExtResource( 2 )]
 position = Vector2( 54, 135 )
@@ -34,3 +71,31 @@ shape = SubResource( 2 )
 [node name="Bottom" type="CollisionShape2D" parent="Game/Boundaries"]
 position = Vector2( 240, 296 )
 shape = SubResource( 2 )
+
+[node name="ButtonLayer" type="CanvasLayer" parent="."]
+
+[node name="Buttons" type="VBoxContainer" parent="ButtonLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 480, 0 )
+theme = ExtResource( 4 )
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ButtonLayer/Buttons"]
+margin_top = 254.0
+margin_right = 480.0
+margin_bottom = 270.0
+alignment = 2
+
+[node name="AbortButton" type="Button" parent="ButtonLayer/Buttons/HBoxContainer"]
+margin_left = 431.0
+margin_right = 480.0
+margin_bottom = 16.0
+hint_tooltip = "Abort the mission, returning to the last planet.
+You don't keep any of the suncakes and you don't gain any experience."
+text = "Abort"
+flat = true
+
+[connection signal="timeout" from="Game/Hud/DestinationTimer" to="." method="_on_DestinationTimer_timeout"]
+[connection signal="timeout" from="Game/Hud/RefreshTimer" to="Game/Hud" method="_on_RefreshTimer_timeout"]
+[connection signal="pressed" from="ButtonLayer/Buttons/HBoxContainer/AbortButton" to="." method="_on_AbortButton_pressed"]

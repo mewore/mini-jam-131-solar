@@ -4,7 +4,6 @@ using Godot;
 
 public class MainMenu : VBoxContainer
 {
-    private const string CURRENT_LOCATION = "Earth";
     private const int SELECTION_DISTANCE = 24;
     private static readonly int SELECTION_DISTANCE_SQUARED = SELECTION_DISTANCE * SELECTION_DISTANCE;
 
@@ -29,11 +28,15 @@ public class MainMenu : VBoxContainer
 
         foreach (Node2D body in bodies)
         {
-            if (body.Name == CURRENT_LOCATION)
+            if (body.Name == Global.CurrentLocation)
             {
                 currentBody = body;
                 break;
             }
+        }
+        if (currentBody == null)
+        {
+            throw new Exception("There's no celestial body with name '" + Global.CurrentLocation + "'");
         }
     }
 
@@ -54,9 +57,8 @@ public class MainMenu : VBoxContainer
             }
             if (@event.IsActionPressed("ui_navigate") && targetBody != null)
             {
-                GD.Print(String.Format("Navigating from {0} to {1} (distance: {2:F0})",
-                    currentBody.Name, targetBody.Name,
-                    currentBody.Position.DistanceTo(targetBody.Position)));
+                Global.TargetLocation = targetBody.Name;
+                Global.DistanceToTarget = currentBody.Position.DistanceTo(targetBody.Position);
                 GetTree().ChangeScene("res://scenes/Flight.tscn");
             }
         }
