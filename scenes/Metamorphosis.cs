@@ -139,6 +139,7 @@ public class Metamorphosis : Control
         {
             case "FireRate": return Global.FireRateSkill;
             case "Firepower": return Global.FirepowerSkill;
+            case "Ammo": return Global.AmmoSkill;
             default:
                 GD.PushWarning("Unrecognized upgrade button name: " + button.Name);
                 return null;

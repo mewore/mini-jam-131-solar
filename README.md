@@ -35,7 +35,7 @@
 - [x] 💙 Upgrade scene (automatically taken there upon journey end or with a button in the celestial map)
 - [x] 💙 Fire speed upgrade
 - [x] 💙 Firepower upgrade
-- [ ] 💙 Ammo count upgrade
+- [x] 💙 Ammo count upgrade
 - [ ] 💙 Bullet speed upgrade
 - [ ] 💙 Max HP upgrade
 - [ ] 💙 Difficulty

@@ -98,10 +98,13 @@ public class Global : Node
     public static SkillState FirepowerSkill = new SkillState(FIREPOWER_SKILL, value => String.Format("{0} damage / bullet", Mathf.RoundToInt(value)));
     public static float Damage => FirepowerSkill.Value;
 
+    private static readonly SkillDefinition AMMO_SKILL = new SkillDefinition(20f, 10f, 23, 50, 0);
+    public static SkillState AmmoSkill = new SkillState(AMMO_SKILL, value => String.Format("{0} bullets", Mathf.RoundToInt(value)));
+    public static int MaxAmmo => Mathf.RoundToInt(AmmoSkill.Value);
+
     public static int MaxHp = 3;
-    public static int MaxAmmo = 20;
     public static float ProjectileSpeed = 80f;
-    public static int Experience = 1000;
+    public static int Experience = OS.IsDebugBuild() ? 1000 : 0;
     public static int EarnedExperience = 0;
     public static bool SuncakeEaten = false;
     public static FlightResult FlightResult = FlightResult.NONE;
