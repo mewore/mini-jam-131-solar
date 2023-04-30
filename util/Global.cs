@@ -46,6 +46,7 @@ public class Global : Node
     public static string CurrentLocation = "Earth";
     public static string TargetLocation = CurrentLocation;
     public static float DistanceToTarget = 15f;
+    public static List<string> PastLocations = new List<string>();
 
     public static int MaxHp = 3;
     public static int MaxAmmo = 20;

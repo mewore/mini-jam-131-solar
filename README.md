@@ -29,7 +29,7 @@
 - [x] 💙 Pickups are not encountered again if already picked up
 - [x] 💙 Shoot to destroy obstacles
 - [x] 💙 Go back when the player's HP reaches 0 - give XP
-- [ ] 💙 Show the currently travelled path
+- [x] 💙 Show the currently travelled path
 - [ ] 💙 Show current location in the celestial map
 - [ ] 💙 Show intended travel destination info (distance, name, etc.)
 - [x] 💙 Upgrade scene (automatically taken there upon journey end or with a button in the celestial map)

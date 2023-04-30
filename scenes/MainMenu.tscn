@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/map/sun.png" type="Texture" id=7]
 
 [sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
 
 [node name="MainMenu" type="VBoxContainer"]
 anchor_right = 1.0
@@ -50,13 +51,16 @@ margin_right = 480.0
 margin_bottom = 16.0
 text = "Metamorphosis"
 
-[node name="CelestialBodies" type="Node2D" parent="."]
+[node name="FlightLines" type="Node2D" parent="."]
 
-[node name="FlightLine" type="Line2D" parent="CelestialBodies"]
-visible = false
-points = PoolVector2Array( 22, 254, 110, 244 )
+[node name="FlightLine" type="Line2D" parent="FlightLines"]
+z_index = 1
 width = 3.0
+default_color = Color( 0.376471, 0.384314, 0.435294, 1 )
 gradient = SubResource( 1 )
+
+[node name="CelestialBodies" type="Node2D" parent="."]
+z_index = 2
 
 [node name="Earth" parent="CelestialBodies" instance=ExtResource( 4 )]
 position = Vector2( 19, 252 )

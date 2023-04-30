@@ -33,6 +33,11 @@ public class Flight : Node2D
         {
             Global.PickSuncakesUp(game.PickedUpSuncakes);
         }
+        if (flightResult == FlightResult.SUCCEEDED)
+        {
+            Global.PastLocations.Add(Global.CurrentLocation);
+            Global.CurrentLocation = Global.TargetLocation;
+        }
         GetTree().ChangeScene("res://scenes/Metamorphosis.tscn");
     }
 }

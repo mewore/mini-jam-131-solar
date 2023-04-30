@@ -9,7 +9,7 @@ public class MainMenu : VBoxContainer
 
     private Node2D currentBody = null;
     private Line2D flightLine;
-    private readonly List<Node2D> bodies = new List<Node2D>();
+    private readonly Dictionary<string, Node2D> bodies = new Dictionary<string, Node2D>();
     private Node2D targetBody = null;
 
     public override void _Ready()
@@ -17,30 +17,61 @@ public class MainMenu : VBoxContainer
         Global.LoadGameData();
         Global.SaveGameData();
 
-        flightLine = GetNode<Line2D>("CelestialBodies/FlightLine");
-        foreach (Node child in GetNode("CelestialBodies").GetChildren())
+        var flightLineContainer = GetNode("FlightLines");
+        flightLine = flightLineContainer.GetNode<Line2D>("FlightLine");
+        foreach (Node2D body in GetNode("CelestialBodies").GetChildren())
         {
-            if (child is Node2D && child != flightLine)
-            {
-                bodies.Add(child as Node2D);
-            }
+            bodies[body.Name] = body;
         }
-
-        foreach (Node2D body in bodies)
-        {
-            if (body.Name == Global.CurrentLocation)
-            {
-                currentBody = body;
-                break;
-            }
-        }
+        currentBody = bodies.ContainsKey(Global.CurrentLocation) ? bodies[Global.CurrentLocation] : null;
+        Node2D startingBody = GetNode("CelestialBodies").GetChild(0) as Node2D;
         if (currentBody == null)
         {
             GD.PushError("There's no celestial body with name '" + Global.CurrentLocation + "'");
-            currentBody = GetNode("CelestialBodies").GetChild(1) as Node2D;
+            currentBody = startingBody;
             Global.CurrentLocation = currentBody.Name;
         }
         GetNode<Button>("Options/MetamorphosisButton").Visible = Global.Experience > 0;
+
+        Node2D lastBody = startingBody;
+        Stack<Line2D> pastLineStack = new Stack<Line2D>(Global.PastLocations.Count);
+        foreach (string bodyName in Global.PastLocations)
+        {
+            Node2D newBody = bodies.ContainsKey(bodyName) ? bodies[bodyName] : null;
+            if (newBody != null)
+            {
+                if (lastBody != null)
+                {
+                    var line = new Line2D();
+                    line.Points = new Vector2[] { lastBody.Position, newBody.Position };
+                    line.DefaultColor = flightLine.DefaultColor;
+                    line.Width = flightLine.Width / 2;
+                    pastLineStack.Push(line);
+                }
+                lastBody = newBody;
+            }
+        }
+        if (lastBody != null)
+        {
+            var line = new Line2D();
+            line.Points = new Vector2[] { lastBody.Position, currentBody.Position };
+            line.DefaultColor = flightLine.DefaultColor;
+            line.Width = flightLine.Width / 2;
+            pastLineStack.Push(line);
+        }
+        float minOpacity = .2f;
+        float opacityDecrement = (1f - minOpacity) / pastLineStack.Count;
+        float opacity = 1f;
+        float minWidth = 1f;
+        float widthDecrement = (flightLine.Width - minWidth) / pastLineStack.Count;
+        float width = flightLine.Width;
+        while (pastLineStack.Count > 0)
+        {
+            Line2D line = pastLineStack.Pop();
+            line.SelfModulate = new Color(line.SelfModulate, opacity -= opacityDecrement);
+            line.Width = width -= widthDecrement;
+            flightLineContainer.AddChild(line);
+        }
     }
 
     public override void _GuiInput(InputEvent @event)
@@ -75,7 +106,7 @@ public class MainMenu : VBoxContainer
     {
         float bestDistanceSquared = SELECTION_DISTANCE_SQUARED;
         Node2D result = null;
-        foreach (Node2D body in bodies)
+        foreach (Node2D body in bodies.Values)
         {
             if (body != currentBody)
             {
