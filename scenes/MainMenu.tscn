@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/title-theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/Title.cs" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://ui/map/earth.png" type="Texture" id=6]
 [ext_resource path="res://ui/map/sun.png" type="Texture" id=7]
 [ext_resource path="res://ui/map/YouAreHere.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ui/map/JourneyInfo.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
@@ -21,6 +22,7 @@ focus_mode = 2
 mouse_filter = 0
 theme = ExtResource( 3 )
 script = ExtResource( 5 )
+targetDisplayEase = 0.1
 
 [node name="Title" type="Label" parent="."]
 margin_right = 480.0
@@ -91,7 +93,7 @@ position = Vector2( 195, 183 )
 position = Vector2( 128, 21 )
 
 [node name="CelestialBody6" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 275, 116 )
+position = Vector2( 269, 154 )
 
 [node name="CelestialBody7" parent="CelestialBodies" instance=ExtResource( 4 )]
 position = Vector2( 355, 246 )
@@ -128,6 +130,9 @@ position = Vector2( 309, 163 )
 
 [node name="YouAreHere" parent="." instance=ExtResource( 8 )]
 z_index = 3
+
+[node name="JourneyInfo" parent="." instance=ExtResource( 9 )]
+visible = false
 
 [connection signal="pressed" from="Options/MetamorphosisButton" to="." method="_on_MetamorphosisButton_pressed"]
 

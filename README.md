@@ -31,7 +31,7 @@
 - [x] 💙 Go back when the player's HP reaches 0 - give XP
 - [x] 💙 Show the currently travelled path
 - [x] 💙 Show current location in the celestial map
-- [ ] 💙 Show intended travel destination info (distance, name, etc.)
+- [x] 💙 Show intended travel destination info (distance, name, etc.)
 - [x] 💙 Upgrade scene (automatically taken there upon journey end or with a button in the celestial map)
 - [ ] 💙 Fire speed upgrade
 - [ ] 💙 Fire power upgrade

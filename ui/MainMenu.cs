@@ -7,6 +7,18 @@ public class MainMenu : VBoxContainer
     private const int SELECTION_DISTANCE = 24;
     private static readonly int SELECTION_DISTANCE_SQUARED = SELECTION_DISTANCE * SELECTION_DISTANCE;
 
+    [Export(PropertyHint.ExpEasing)]
+    private float targetDisplayEase = .5f;
+
+    [Export]
+    private float targetDisplayTime = 2f;
+
+    private float startedDisplayingTargetAt = 0f;
+
+    private JourneyInfo journeyInfo;
+
+    private float now = 0f;
+
     private Node2D currentBody = null;
     private Line2D flightLine;
     private readonly Dictionary<string, Node2D> bodies = new Dictionary<string, Node2D>();
@@ -74,6 +86,27 @@ public class MainMenu : VBoxContainer
         }
 
         GetNode<Button>("Options/MetamorphosisButton").Visible = Global.Experience > 0;
+
+        journeyInfo = GetNode<JourneyInfo>("JourneyInfo");
+    }
+
+    public override void _Process(float delta)
+    {
+        now += delta;
+        if (flightLine.Visible = journeyInfo.Visible = targetBody != null)
+        {
+            updateTargetInfo();
+        }
+    }
+
+    private void updateTargetInfo()
+    {
+        float amount = Mathf.Ease(Mathf.Min((now - startedDisplayingTargetAt) / targetDisplayTime, 1f), targetDisplayEase);
+        Vector2 position = currentBody.Position.LinearInterpolate(targetBody.Position, amount);
+        flightLine.Points = new Vector2[] { currentBody.Position, position };
+        journeyInfo.Position = (currentBody.Position + position) * .5f;
+        journeyInfo.Update(targetBody.Name, currentBody.Position.DistanceTo(position));
+        journeyInfo.Modulate = new Color(journeyInfo.Modulate, amount);
     }
 
     public override void _GuiInput(InputEvent @event)
@@ -84,11 +117,10 @@ public class MainMenu : VBoxContainer
             targetBody = getTargetBody((@event as InputEventMouse).Position);
             if (targetBody != oldTargetBody)
             {
-                flightLine.Visible = targetBody != null;
                 MouseDefaultCursorShape = targetBody != null ? CursorShape.PointingHand : CursorShape.Arrow;
                 if (targetBody != null)
                 {
-                    flightLine.Points = new Vector2[] { currentBody.Position, targetBody.Position };
+                    startedDisplayingTargetAt = now;
                 }
             }
             if (@event.IsActionPressed("ui_navigate") && targetBody != null)
