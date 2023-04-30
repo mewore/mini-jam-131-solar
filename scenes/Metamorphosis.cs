@@ -10,7 +10,7 @@ public class Metamorphosis : Control
     private string upgradeQuestionTemplate;
     private Label upgradeQuestionLabel;
 
-    private readonly List<(Button, SkillState)> upgradeButtons = new List<(Button, SkillState)>();
+    private readonly List<(Button, SkillState, Line2D)> upgradeButtons = new List<(Button, SkillState, Line2D)>();
     private string upgradeInfoTemplate;
     private Label upgradeInfoLabel;
 
@@ -56,7 +56,15 @@ public class Metamorphosis : Control
         {
             SkillState skill = getSkill(upgradeButton);
             upgradeButton.Connect("pressed", this, nameof(_on_UpgradeButton_pressed), new Godot.Collections.Array(new object[] { upgradeButtons.Count }));
-            upgradeButtons.Add((upgradeButton, skill));
+            Line2D progressLine = new Line2D();
+            Vector2 rectPos = upgradeButton.RectGlobalPosition;
+            Vector2 rectSize = upgradeButton.RectSize;
+            progressLine.Position = new Vector2(0, rectSize.y);
+            progressLine.Points = new Vector2[] { Vector2.Zero, new Vector2(rectSize.x, 0) };
+            progressLine.Width = 1;
+            progressLine.Scale = new Vector2(skill.UpgradeProgress, 1f);
+            upgradeButton.AddChild(progressLine);
+            upgradeButtons.Add((upgradeButton, skill, progressLine));
         }
         refreshUpgradeButtons();
         refreshUpgradeInfo(GetGlobalMousePosition());
@@ -67,6 +75,7 @@ public class Metamorphosis : Control
         SkillState skill = upgradeButtons[index].Item2;
         Global.Experience -= skill.NextCost;
         skill.Upgrade();
+        upgradeButtons[index].Item3.Scale = new Vector2(skill.UpgradeProgress, 1f);
         UpdateXpText();
         refreshUpgradeButtons();
         refreshUpgradeInfo(GetGlobalMousePosition());
@@ -88,7 +97,7 @@ public class Metamorphosis : Control
 
     private void refreshUpgradeInfo(Vector2 mousePos)
     {
-        foreach ((Button, SkillState) upgrade in upgradeButtons)
+        foreach ((Button, SkillState, Line2D) upgrade in upgradeButtons)
         {
             Vector2 rectPos = upgrade.Item1.RectGlobalPosition;
             Vector2 rectSize = upgrade.Item1.RectSize;

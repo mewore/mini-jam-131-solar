@@ -41,6 +41,7 @@ public class SkillState
     public float NextValue => definition.Value(upgrades + 1);
     public int NextCost => definition.NextCost(upgrades);
     public bool CanUpgrade => upgrades < definition.MaxUpgrades;
+    public float UpgradeProgress => (float)(upgrades) / definition.MaxUpgrades;
 
     public void Upgrade() => upgrades++;
     public string Format(float value) => valueFormatter(value);
