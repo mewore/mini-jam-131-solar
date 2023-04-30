@@ -31,7 +31,7 @@ public class MainMenu : VBoxContainer
             currentBody = startingBody;
             Global.CurrentLocation = currentBody.Name;
         }
-        GetNode<Button>("Options/MetamorphosisButton").Visible = Global.Experience > 0;
+        GetNode<Node2D>("YouAreHere").Position = currentBody.Position;
 
         Node2D lastBody = startingBody;
         Stack<Line2D> pastLineStack = new Stack<Line2D>(Global.PastLocations.Count);
@@ -72,6 +72,8 @@ public class MainMenu : VBoxContainer
             line.Width = width -= widthDecrement;
             flightLineContainer.AddChild(line);
         }
+
+        GetNode<Button>("Options/MetamorphosisButton").Visible = Global.Experience > 0;
     }
 
     public override void _GuiInput(InputEvent @event)

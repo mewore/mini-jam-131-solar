@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/title-theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/Title.cs" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/MainMenu.cs" type="Script" id=5]
 [ext_resource path="res://ui/map/earth.png" type="Texture" id=6]
 [ext_resource path="res://ui/map/sun.png" type="Texture" id=7]
+[ext_resource path="res://ui/map/YouAreHere.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
@@ -63,7 +64,7 @@ gradient = SubResource( 1 )
 z_index = 2
 
 [node name="Earth" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 19, 252 )
+position = Vector2( 23, 250 )
 
 [node name="Sprite" parent="CelestialBodies/Earth" index="0"]
 texture = ExtResource( 6 )
@@ -124,6 +125,9 @@ position = Vector2( 309, 163 )
 
 [node name="CelestialBody17" parent="CelestialBodies" instance=ExtResource( 4 )]
 position = Vector2( 309, 163 )
+
+[node name="YouAreHere" parent="." instance=ExtResource( 8 )]
+z_index = 3
 
 [connection signal="pressed" from="Options/MetamorphosisButton" to="." method="_on_MetamorphosisButton_pressed"]
 
