@@ -102,8 +102,11 @@ public class Global : Node
     public static SkillState AmmoSkill = new SkillState(AMMO_SKILL, value => String.Format("{0} bullets", Mathf.RoundToInt(value)));
     public static int MaxAmmo => Mathf.RoundToInt(AmmoSkill.Value);
 
+    private static readonly SkillDefinition BULLET_SPEED_SKILL = new SkillDefinition(80f, 20f, 21, 25, 0);
+    public static SkillState BulletSpeedSkill = new SkillState(BULLET_SPEED_SKILL, value => String.Format("{0} px / sec", Mathf.RoundToInt(value)));
+    public static float ProjectileSpeed => BulletSpeedSkill.Value;
+
     public static int MaxHp = 3;
-    public static float ProjectileSpeed = 80f;
     public static int Experience = OS.IsDebugBuild() ? 1000 : 0;
     public static int EarnedExperience = 0;
     public static bool SuncakeEaten = false;

@@ -36,14 +36,16 @@
 - [x] 💙 Fire speed upgrade
 - [x] 💙 Firepower upgrade
 - [x] 💙 Ammo count upgrade
-- [ ] 💙 Bullet speed upgrade
+- [x] 💙 Bullet speed upgrade
 - [ ] 💙 Max HP upgrade
+- [ ] 💙 Show how much a skill has been upgraded
 - [ ] 💙 Difficulty
 - [ ] 💙 When the Sun is reached, just say the player has won in the celestial map
 - [ ] 💟 Publish `0.1.0`
 
 ### Basic features
 
+- [ ] 💙 Turret upgrade
 - [ ] 💙 Show HP as bars
 - [ ] 💙 Proper feedback when hit (freeze for a moment, make the HP label flash)
 - [ ] 💙 Proper feedback and transition on death
