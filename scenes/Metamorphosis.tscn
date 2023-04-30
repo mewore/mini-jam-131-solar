@@ -82,10 +82,17 @@ margin_right = 480.0
 margin_bottom = 117.0
 
 [node name="FireRate" type="Button" parent="Upgrades"]
-margin_right = 480.0
+margin_right = 235.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 text = "Fire rate"
+
+[node name="Firepower" type="Button" parent="Upgrades"]
+margin_left = 239.0
+margin_right = 479.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "Firepower"
 
 [node name="UpgradeInfo" type="Label" parent="."]
 margin_top = 121.0

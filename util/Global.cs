@@ -94,10 +94,14 @@ public class Global : Node
     public static SkillState FireRateSkill = new SkillState(FIRE_RATE_SKILL, value => String.Format("{0:F2} sec / shot", value));
     public static float ShootCooldown => FireRateSkill.Value;
 
+    private static readonly SkillDefinition FIREPOWER_SKILL = new SkillDefinition(1f, 1f, 9, 150, 0);
+    public static SkillState FirepowerSkill = new SkillState(FIREPOWER_SKILL, value => String.Format("{0} damage / bullet", Mathf.RoundToInt(value)));
+    public static float Damage => FirepowerSkill.Value;
+
     public static int MaxHp = 3;
     public static int MaxAmmo = 20;
     public static float ProjectileSpeed = 80f;
-    public static int Experience = 0;
+    public static int Experience = 1000;
     public static int EarnedExperience = 0;
     public static bool SuncakeEaten = false;
     public static FlightResult FlightResult = FlightResult.NONE;

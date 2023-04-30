@@ -34,7 +34,9 @@
 - [x] 💙 Show intended travel destination info (distance, name, etc.)
 - [x] 💙 Upgrade scene (automatically taken there upon journey end or with a button in the celestial map)
 - [x] 💙 Fire speed upgrade
-- [ ] 💙 Fire power upgrade
+- [x] 💙 Firepower upgrade
+- [ ] 💙 Ammo count upgrade
+- [ ] 💙 Bullet speed upgrade
 - [ ] 💙 Max HP upgrade
 - [ ] 💙 Difficulty
 - [ ] 💙 When the Sun is reached, just say the player has won in the celestial map
@@ -47,9 +49,7 @@
 - [ ] 💙 Proper feedback and transition on death
 - [ ] 💙 Pause menu
 - [ ] 💙 Show some info when navigating in the celestial map
-- [ ] 💙 Limited ammo
-- [ ] 💙 Ammo count upgrade
-- [ ] 💙 Bullet speed upgrade
+- [x] 💙 Limited ammo
 - [ ] 💙 Auto-saving/auto-loading
 - [ ] 💜 Celestial map environment background
 - [ ] 💜 Flight scene environment background

@@ -22,13 +22,11 @@ public class PlayerProjectile : Projectile
             var collider = (rayCast.GetCollider() as Area2D).Owner;
             if (collider is Obstacle)
             {
-                (collider as Obstacle).TakeHit(rayCast.GetCollisionPoint());
+                (collider as Obstacle).TakeHit(rayCast.GetCollisionPoint(), Global.Damage);
             }
             QueueFree();
+            return;
         }
-        else
-        {
-            Move(delta);
-        }
+        Move(delta);
     }
 }

@@ -18,6 +18,8 @@ public class Obstacle : Node2D, ScrollingObject
     [Export]
     private int hp = 2;
 
+    private float currentHp;
+
     public override void _Ready()
     {
         var sprite = GetNode<Sprite>("Sprite");
@@ -28,6 +30,7 @@ public class Obstacle : Node2D, ScrollingObject
             TargetViewport.AddChild(targetViewportSprite);
             sprite.Visible = false;
         }
+        currentHp = hp;
     }
 
     public override void _PhysicsProcess(float delta)
@@ -41,10 +44,10 @@ public class Obstacle : Node2D, ScrollingObject
         }
     }
 
-    public void TakeHit(Vector2 position)
+    public void TakeHit(Vector2 position, float damage)
     {
         velocity += (Position - position).Normalized() * (velocity.Length() * SLOWDOWN_PER_HIT);
-        if (--hp <= 0)
+        if ((currentHp -= damage) <= 0f)
         {
             EmitSignal(nameof(Destroyed));
             QueueFree();
