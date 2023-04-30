@@ -47,6 +47,27 @@ public class Global : Node
 
     public static int MaxHp = 3;
 
+    public static string FlightId => CurrentLocation + " -> " + TargetLocation;
+    private static Dictionary<string, HashSet<int>> pickedUpSuncakes = new Dictionary<string, HashSet<int>>();
+    public static bool IsSuncakePickedUp(int index)
+    {
+        string key = FlightId;
+        if (!pickedUpSuncakes.ContainsKey(key))
+        {
+            pickedUpSuncakes[key] = new HashSet<int>();
+        }
+        return pickedUpSuncakes[key].Contains(index);
+    }
+    public static void PickSuncakeUp(int index)
+    {
+        string key = FlightId;
+        if (!pickedUpSuncakes.ContainsKey(key))
+        {
+            pickedUpSuncakes[key] = new HashSet<int>();
+        }
+        pickedUpSuncakes[key].Add(index);
+    }
+
     public override void _Ready()
     {
         // if (save_file_exists(SETTINGS_SAVE_FILE))

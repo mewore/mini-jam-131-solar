@@ -8,6 +8,9 @@ public class Suncake : Node2D, Pickup, ScrollingObject
     private Vector2 velocity = Vector2.Zero;
     public float ScrollSpeed { set => velocity = Vector2.Left * value; }
 
+    private int index;
+    public int Index { set => index = value; }
+
     private bool pickable = true;
     public bool Pickable => pickable;
 
@@ -23,6 +26,7 @@ public class Suncake : Node2D, Pickup, ScrollingObject
     public void Disappear()
     {
         pickable = false;
+        Global.PickSuncakeUp(index);
         QueueFree();
     }
 }

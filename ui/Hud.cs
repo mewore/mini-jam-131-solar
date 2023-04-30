@@ -6,6 +6,7 @@ public class Hud : CanvasLayer
     private Label timerLabel;
     private Timer destinationTimer;
     private string timerTextTemplate;
+    private string flightId = Global.FlightId;
 
     private Line2D timerLine;
 
@@ -36,7 +37,9 @@ public class Hud : CanvasLayer
 
     private void updateTimerText()
     {
-        timerLabel.Text = timerTextTemplate.Replace("<TIME_LEFT>", Mathf.RoundToInt(destinationTimer.TimeLeft).ToString());
+        timerLabel.Text = timerTextTemplate
+            .Replace("<FLIGHT_ID>", flightId)
+            .Replace("<TIME_LEFT>", Mathf.RoundToInt(destinationTimer.TimeLeft).ToString());
     }
 
     public void _on_RefreshTimer_timeout() => updateTimerText();

@@ -66,7 +66,7 @@ margin_bottom = 37.0
 theme = ExtResource( 4 )
 custom_colors/font_color = Color( 0.0196078, 0.913725, 1, 0.321569 )
 custom_constants/line_spacing = 5
-text = "Distance to destination:
+text = "Distance to destination (<FLIGHT_ID>):
 <TIME_LEFT> km"
 align = 1
 

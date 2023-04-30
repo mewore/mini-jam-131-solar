@@ -32,8 +32,12 @@ public class Game : Node2D
     private NoiseTexture obstacleNoiseTexture;
 
     [Export]
+    private float suncakeFrequency = .5f;
+
+    [Export]
     private PackedScene suncakeScene = null;
     private Node pickupContainer;
+    private int suncakeIndex = 0;
 
     private float now = 0f;
 
@@ -45,7 +49,7 @@ public class Game : Node2D
         obstacleContainer = GetNode("Obstacles");
         obstacleNoiseTexture = obstacleContainer.GetNode<Sprite>("ObstacleNoise").Texture as NoiseTexture;
         obstacleCreationNoise = obstacleNoiseTexture.Noise;
-        int seed = (Global.CurrentLocation.Hash() + Global.TargetLocation.Hash()).GetHashCode();
+        int seed = Global.FlightId.GetHashCode();
         obstacleCreationNoise.Seed = seed;
         pickupContainer = GetNode("Pickups");
     }
@@ -66,21 +70,36 @@ public class Game : Node2D
         return (min, max);
     }
 
-    public void _on_SmallObstacleCreationTimer_timeout() => createObject(smallObstacleScene, 1, obstacleContainer, Obstacle.OBSTACLE_PADDING);
-    public void _on_ObstacleCreationTimer_timeout() => createObject(obstacleScene, 2, obstacleContainer, Obstacle.OBSTACLE_PADDING);
-    public void _on_BigObstacleCreationTimer_timeout() => createObject(bigObstacleScene, 8, obstacleContainer, Obstacle.OBSTACLE_PADDING);
-    public void _on_SuncakeTimer_timeout() => createObject(suncakeScene, 4, pickupContainer, Suncake.SUNCAKE_PADDING, true);
+    public void _on_SmallObstacleCreationTimer_timeout() => createObject(smallObstacleScene, 1, obstacleContainer, Obstacle.OBSTACLE_PADDING, obstacleFrequency);
+    public void _on_ObstacleCreationTimer_timeout() => createObject(obstacleScene, 2, obstacleContainer, Obstacle.OBSTACLE_PADDING, obstacleFrequency);
+    public void _on_BigObstacleCreationTimer_timeout() => createObject(bigObstacleScene, 8, obstacleContainer, Obstacle.OBSTACLE_PADDING, obstacleFrequency);
+    public void _on_SuncakeTimer_timeout()
+    {
+        if (!Global.IsSuncakePickedUp(suncakeIndex))
+        {
+            Suncake suncake = createObject(suncakeScene, 4, pickupContainer, Suncake.SUNCAKE_PADDING, suncakeFrequency, true) as Suncake;
+            if (suncake != null)
+            {
+                suncake.Index = suncakeIndex;
+            }
+        }
+        else
+        {
+            GD.Print("Skipping creation of suncake!");
+        }
+        suncakeIndex++;
+    }
 
-    private void createObject(PackedScene scene, int additionalSamples, Node container, float padding, bool reverseSampling = false)
+    private ScrollingObject createObject(PackedScene scene, int additionalSamples, Node container, float padding, float frequency, bool reverseSampling = false)
     {
         var noiseRange = getNoiseRange(padding);
-        float threshold = (noiseRange.Item1 + (noiseRange.Item2 - noiseRange.Item1) * (1f - obstacleFrequency));
+        float threshold = (noiseRange.Item1 + (noiseRange.Item2 - noiseRange.Item1) * (1f - frequency));
         Vector2 position = getRandomScrollingObjectPos(padding);
         Vector2 offset = Vector2.Right * now * obstacleMovementSpeed;
         float value = obstacleCreationNoise.GetNoise2dv(position + offset);
         if (reverseSampling ? (value > threshold) : (value < threshold))
         {
-            return;
+            return null;
         }
         for (int sample = 0; sample < additionalSamples; sample++)
         {
@@ -100,6 +119,7 @@ public class Game : Node2D
             (createdObject as Obstacle).TargetViewport = GetNode<Viewport>("Obstacles/Viewport");
         }
         container.AddChild(createdObject as Node);
+        return createdObject;
     }
 
     private Vector2 getRandomScrollingObjectPos(float padding)

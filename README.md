@@ -26,7 +26,7 @@
 - [x] 💙 HP (replenished upon arrival)
 - [x] 💙 Obstacles
 - [x] 💙 Suncake pickups
-- [ ] 💙 Pickups are not encountered again if already picked up
+- [x] 💙 Pickups are not encountered again if already picked up
 - [ ] 💙 Shoot to destroy obstacles
 - [ ] 💙 Go back when the player's HP reaches 0 - give XP
 - [ ] 💙 Button that takes the player from the map scene to the upgrade scene (which is just )
