@@ -4,6 +4,48 @@ using Godot;
 
 public enum FlightResult { NONE, SUCCEEDED, FAILED, ABORTED }
 
+public struct SkillDefinition
+{
+    public SkillDefinition(float initialValue, float incrementPerUpgrade, int maxUpgrades, int intialCost, int costIncrement = 0)
+    {
+        InitialValue = initialValue;
+        IncrementPerUpgrade = incrementPerUpgrade;
+        MaxUpgrades = maxUpgrades;
+        InitialCost = intialCost;
+        CostIncrement = costIncrement;
+    }
+
+    public float InitialValue { get; }
+    public float IncrementPerUpgrade { get; }
+    public int MaxUpgrades { get; }
+    public int InitialCost { get; }
+    public int CostIncrement { get; }
+
+    public float Value(int upgrades) => InitialValue + upgrades * IncrementPerUpgrade;
+    public int NextCost(int upgrades) => InitialCost + upgrades * CostIncrement;
+}
+
+public class SkillState
+{
+    private readonly SkillDefinition definition;
+    private readonly Func<float, string> valueFormatter;
+    private int upgrades = 0;
+
+    public SkillState(SkillDefinition definition, Func<float, string> valueFormatter)
+    {
+        this.definition = definition;
+        this.valueFormatter = valueFormatter;
+    }
+
+    public float Value => definition.Value(upgrades);
+    public float NextValue => definition.Value(upgrades + 1);
+    public int NextCost => definition.NextCost(upgrades);
+    public bool CanUpgrade => upgrades < definition.MaxUpgrades;
+
+    public void Upgrade() => upgrades++;
+    public string Format(float value) => valueFormatter(value);
+}
+
 public class Global : Node
 {
     public const int INFINITE_TELEPORTS = 1 << 30;
@@ -48,10 +90,13 @@ public class Global : Node
     public static float DistanceToTarget = 15f;
     public static List<string> PastLocations = new List<string>();
 
+    private static readonly SkillDefinition FIRE_RATE_SKILL = new SkillDefinition(.5f, -.1f, 4, 50, 50);
+    public static SkillState FireRateSkill = new SkillState(FIRE_RATE_SKILL, value => String.Format("{0:F2} sec / shot", value));
+    public static float ShootCooldown => FireRateSkill.Value;
+
     public static int MaxHp = 3;
     public static int MaxAmmo = 20;
-    public static float ProjectilSpeed = 80f;
-    public static float ShootCooldown = .5f;
+    public static float ProjectileSpeed = 80f;
     public static int Experience = 0;
     public static int EarnedExperience = 0;
     public static bool SuncakeEaten = false;
@@ -80,6 +125,7 @@ public class Global : Node
         {
             pickedUpSuncakes[key].Add(index);
         }
+        Suncakes += suncakeIndices.Count;
     }
 
     public override void _Ready()

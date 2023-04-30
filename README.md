@@ -33,7 +33,7 @@
 - [x] 💙 Show current location in the celestial map
 - [x] 💙 Show intended travel destination info (distance, name, etc.)
 - [x] 💙 Upgrade scene (automatically taken there upon journey end or with a button in the celestial map)
-- [ ] 💙 Fire speed upgrade
+- [x] 💙 Fire speed upgrade
 - [ ] 💙 Fire power upgrade
 - [ ] 💙 Max HP upgrade
 - [ ] 💙 Difficulty

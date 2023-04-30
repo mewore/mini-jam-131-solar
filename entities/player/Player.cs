@@ -42,7 +42,7 @@ public class Player : KinematicBody2D
     private Node projectileContainerNode;
 
     private int ammoLeft = Global.MaxAmmo;
-    private readonly Vector2 bulletVelocity = Vector2.Right * Global.ProjectilSpeed;
+    private readonly Vector2 bulletVelocity = Vector2.Right * Global.ProjectileSpeed;
 
     public override void _Ready()
     {

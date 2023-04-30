@@ -70,20 +70,37 @@ rect_min_size = Vector2( 0, 16 )
 [node name="UpgradeQuestion" type="Label" parent="."]
 margin_top = 74.0
 margin_right = 480.0
-margin_bottom = 123.0
+margin_bottom = 97.0
 text = "Turn into a cocoon and evolve past your limitations?
-Experience: <EXPERIENCE>
-
-...Well, except that this hasn't been implemented yet."
+Experience: <EXPERIENCE>"
 align = 1
 autowrap = true
 
-[node name="Upgrades" type="HBoxContainer" parent="."]
-margin_top = 127.0
+[node name="Upgrades" type="HFlowContainer" parent="."]
+margin_top = 101.0
+margin_right = 480.0
+margin_bottom = 117.0
+
+[node name="FireRate" type="Button" parent="Upgrades"]
+margin_right = 480.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "Fire rate"
+
+[node name="UpgradeInfo" type="Label" parent="."]
+margin_top = 121.0
+margin_right = 480.0
+margin_bottom = 157.0
+text = "[<OLD>] -> [<NEW>]
+Evolution cost: <COST> experience
+<WARNING>"
+align = 1
+
+[node name="Spacer" type="Control" parent="."]
+margin_top = 161.0
 margin_right = 480.0
 margin_bottom = 250.0
 size_flags_vertical = 3
-alignment = 1
 
 [node name="GoToMapButton" type="Button" parent="."]
 margin_left = 162.0
