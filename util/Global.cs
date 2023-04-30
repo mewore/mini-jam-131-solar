@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
+public enum FlightResult { NONE, SUCCEEDED, FAILED, ABORTED }
+
 public class Global : Node
 {
     public const int INFINITE_TELEPORTS = 1 << 30;
@@ -43,12 +45,17 @@ public class Global : Node
 
     public static string CurrentLocation = "Earth";
     public static string TargetLocation = CurrentLocation;
-    public static float DistanceToTarget = 60f;
+    public static float DistanceToTarget = 15f;
 
     public static int MaxHp = 3;
     public static int MaxAmmo = 20;
     public static float ProjectilSpeed = 80f;
     public static float ShootCooldown = .5f;
+    public static int Experience = 0;
+    public static int EarnedExperience = 0;
+    public static bool SuncakeEaten = false;
+    public static FlightResult FlightResult = FlightResult.NONE;
+    public static int Suncakes = 0;
 
     public static string FlightId => CurrentLocation + " -> " + TargetLocation;
     private static Dictionary<string, HashSet<int>> pickedUpSuncakes = new Dictionary<string, HashSet<int>>();
@@ -61,14 +68,17 @@ public class Global : Node
         }
         return pickedUpSuncakes[key].Contains(index);
     }
-    public static void PickSuncakeUp(int index)
+    public static void PickSuncakesUp(ICollection<int> suncakeIndices)
     {
         string key = FlightId;
         if (!pickedUpSuncakes.ContainsKey(key))
         {
             pickedUpSuncakes[key] = new HashSet<int>();
         }
-        pickedUpSuncakes[key].Add(index);
+        foreach (int index in suncakeIndices)
+        {
+            pickedUpSuncakes[key].Add(index);
+        }
     }
 
     public override void _Ready()

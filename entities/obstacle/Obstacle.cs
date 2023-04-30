@@ -3,6 +3,9 @@ using System;
 
 public class Obstacle : Node2D, ScrollingObject
 {
+    [Signal]
+    public delegate void Destroyed();
+
     public const float OBSTACLE_PADDING = 64;
     private const float SLOWDOWN_PER_HIT = .1f;
 
@@ -43,6 +46,7 @@ public class Obstacle : Node2D, ScrollingObject
         velocity += (Position - position).Normalized() * (velocity.Length() * SLOWDOWN_PER_HIT);
         if (--hp <= 0)
         {
+            EmitSignal(nameof(Destroyed));
             QueueFree();
             targetViewportSprite.QueueFree();
         }

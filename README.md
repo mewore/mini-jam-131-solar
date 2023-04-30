@@ -28,14 +28,15 @@
 - [x] 💙 Suncake pickups
 - [x] 💙 Pickups are not encountered again if already picked up
 - [x] 💙 Shoot to destroy obstacles
-- [ ] 💙 Go back when the player's HP reaches 0 - give XP
+- [x] 💙 Go back when the player's HP reaches 0 - give XP
 - [ ] 💙 Show the currently travelled path
 - [ ] 💙 Show current location in the celestial map
 - [ ] 💙 Show intended travel destination info (distance, name, etc.)
-- [ ] 💙 Button that takes the player from the map scene to the upgrade scene (which is just )
+- [x] 💙 Upgrade scene (automatically taken there upon journey end or with a button in the celestial map)
 - [ ] 💙 Fire speed upgrade
 - [ ] 💙 Fire power upgrade
 - [ ] 💙 Max HP upgrade
+- [ ] 💙 Difficulty
 - [ ] 💙 When the Sun is reached, just say the player has won in the celestial map
 - [ ] 💟 Publish `0.1.0`
 

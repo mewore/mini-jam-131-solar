@@ -48,6 +48,11 @@ public class Hud : CanvasLayer
         updateOpacity(ammoLabel);
     }
 
+    public int GetEarnedExperience()
+    {
+        return Mathf.RoundToInt(destinationTimer.WaitTime - destinationTimer.TimeLeft);
+    }
+
     private void updateOpacity(CanvasItem label)
     {
         if (label.Modulate.a > defaultLabelOpacity)

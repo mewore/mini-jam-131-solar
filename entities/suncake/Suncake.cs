@@ -3,6 +3,9 @@ using System;
 
 public class Suncake : Node2D, Pickup, ScrollingObject
 {
+    [Signal]
+    public delegate void PickedUp(int index);
+
     public const float SUNCAKE_PADDING = 32;
 
     private Vector2 velocity = Vector2.Zero;
@@ -26,7 +29,7 @@ public class Suncake : Node2D, Pickup, ScrollingObject
     public void Disappear()
     {
         pickable = false;
-        Global.PickSuncakeUp(index);
+        EmitSignal(nameof(PickedUp), index);
         QueueFree();
     }
 }

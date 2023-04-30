@@ -36,8 +36,11 @@ public class MainMenu : VBoxContainer
         }
         if (currentBody == null)
         {
-            throw new Exception("There's no celestial body with name '" + Global.CurrentLocation + "'");
+            GD.PushError("There's no celestial body with name '" + Global.CurrentLocation + "'");
+            currentBody = GetNode("CelestialBodies").GetChild(1) as Node2D;
+            Global.CurrentLocation = currentBody.Name;
         }
+        GetNode<Button>("Options/MetamorphosisButton").Visible = Global.Experience > 0;
     }
 
     public override void _GuiInput(InputEvent @event)
@@ -57,8 +60,12 @@ public class MainMenu : VBoxContainer
             }
             if (@event.IsActionPressed("ui_navigate") && targetBody != null)
             {
+                // TODO: Autosave
                 Global.TargetLocation = targetBody.Name;
                 Global.DistanceToTarget = currentBody.Position.DistanceTo(targetBody.Position);
+                Global.EarnedExperience = 0;
+                Global.SuncakeEaten = false;
+                Global.FlightResult = FlightResult.ABORTED;
                 GetTree().ChangeScene("res://scenes/Flight.tscn");
             }
         }
@@ -81,5 +88,10 @@ public class MainMenu : VBoxContainer
             }
         }
         return result;
+    }
+
+    public void _on_MetamorphosisButton_pressed()
+    {
+        GetTree().ChangeScene("res://scenes/Metamorphosis.tscn");
     }
 }

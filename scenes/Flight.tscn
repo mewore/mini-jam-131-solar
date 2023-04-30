@@ -196,6 +196,7 @@ flat = true
 [connection signal="timeout" from="Game/Obstacles/BigObstacleCreationTimer3" to="Game" method="_on_BigObstacleCreationTimer_timeout"]
 [connection signal="timeout" from="Game/Pickups/SuncakeTimer" to="Game" method="_on_SuncakeTimer_timeout"]
 [connection signal="AmmoChanged" from="Game/Player" to="Game/Hud" method="_on_Player_AmmoChanged"]
+[connection signal="HpChanged" from="Game/Player" to="." method="_on_Player_HpChanged"]
 [connection signal="HpChanged" from="Game/Player" to="Game/Hud" method="_on_Player_HpChanged"]
 [connection signal="timeout" from="Game/Hud/DestinationTimer" to="." method="_on_DestinationTimer_timeout"]
 [connection signal="timeout" from="Game/Hud/RefreshTimer" to="Game/Hud" method="_on_RefreshTimer_timeout"]

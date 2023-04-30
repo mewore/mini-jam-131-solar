@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/main-menu-theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/Metamorphosis.cs" type="Script" id=2]
+
+[node name="Cocoon" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -227, -13 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Margin" type="Control" parent="."]
+margin_right = 480.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+
+[node name="FailureLabel" type="Label" parent="."]
+visible = false
+self_modulate = Color( 0.741176, 0.372549, 0.372549, 1 )
+margin_top = 20.0
+margin_right = 480.0
+margin_bottom = 43.0
+text = "Ashamed of your failure, you return with tattered wings. You reflect on your failure for a long time and think of ways to improve..."
+align = 1
+autowrap = true
+
+[node name="SuccessLabel" type="Label" parent="."]
+visible = false
+self_modulate = Color( 0.619608, 0.658824, 0.478431, 1 )
+margin_top = 20.0
+margin_right = 480.0
+margin_bottom = 43.0
+text = "Your journey was exciting! Unfortunately, your success leads you to take it too lightly. You forget most of it (80%)."
+align = 1
+autowrap = true
+
+[node name="AbortLabel" type="Label" parent="."]
+visible = false
+self_modulate = Color( 0.345098, 0.34902, 0.360784, 1 )
+margin_top = 20.0
+margin_right = 480.0
+margin_bottom = 43.0
+text = "Journey? What journey? You didn't even try to go somewhere, you returned while you still had more to give."
+align = 1
+autowrap = true
+
+[node name="XpEarnedLabel" type="Label" parent="."]
+margin_top = 20.0
+margin_right = 480.0
+margin_bottom = 30.0
+text = "+<XP_EARNED> EXPERIENCE"
+align = 1
+autowrap = true
+
+[node name="EatSuncakeButton" type="Button" parent="."]
+margin_left = 138.0
+margin_top = 34.0
+margin_right = 342.0
+margin_bottom = 50.0
+size_flags_horizontal = 4
+text = "Eat a suncake (x2 earned XP)?"
+
+[node name="Margin2" type="Control" parent="."]
+margin_top = 54.0
+margin_right = 480.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 16 )
+
+[node name="UpgradeQuestion" type="Label" parent="."]
+margin_top = 74.0
+margin_right = 480.0
+margin_bottom = 123.0
+text = "Turn into a cocoon and evolve past your limitations?
+Experience: <EXPERIENCE>
+
+...Well, except that this hasn't been implemented yet."
+align = 1
+autowrap = true
+
+[node name="Upgrades" type="HBoxContainer" parent="."]
+margin_top = 127.0
+margin_right = 480.0
+margin_bottom = 250.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="GoToMapButton" type="Button" parent="."]
+margin_left = 162.0
+margin_top = 254.0
+margin_right = 317.0
+margin_bottom = 270.0
+size_flags_horizontal = 4
+text = "Plan your next journey"
+
+[connection signal="pressed" from="EatSuncakeButton" to="." method="_on_EatSuncakeButton_pressed"]
+[connection signal="pressed" from="GoToMapButton" to="." method="_on_GoToMapButton_pressed"]

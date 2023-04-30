@@ -13,6 +13,7 @@
 [node name="MainMenu" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_min_size = Vector2( 480, 0 )
 rect_pivot_offset = Vector2( 301, 238 )
 focus_mode = 2
 mouse_filter = 0
@@ -32,9 +33,22 @@ script = ExtResource( 2 )
 [node name="Margin" type="Control" parent="."]
 margin_top = 55.0
 margin_right = 480.0
-margin_bottom = 65.0
+margin_bottom = 250.0
 rect_min_size = Vector2( 0, 10 )
 mouse_filter = 1
+size_flags_vertical = 3
+
+[node name="Options" type="HBoxContainer" parent="."]
+margin_top = 254.0
+margin_right = 480.0
+margin_bottom = 270.0
+alignment = 2
+
+[node name="MetamorphosisButton" type="Button" parent="Options"]
+margin_left = 375.0
+margin_right = 480.0
+margin_bottom = 16.0
+text = "Metamorphosis"
 
 [node name="CelestialBodies" type="Node2D" parent="."]
 
@@ -106,6 +120,8 @@ position = Vector2( 309, 163 )
 
 [node name="CelestialBody17" parent="CelestialBodies" instance=ExtResource( 4 )]
 position = Vector2( 309, 163 )
+
+[connection signal="pressed" from="Options/MetamorphosisButton" to="." method="_on_MetamorphosisButton_pressed"]
 
 [editable path="CelestialBodies/Earth"]
 [editable path="CelestialBodies/Sun"]

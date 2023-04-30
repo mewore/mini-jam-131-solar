@@ -2,14 +2,37 @@ using Godot;
 
 public class Flight : Node2D
 {
+    private const int DEATH_EXPERIENCE_MULTIPLIER = 5;
+
     public void _on_DestinationTimer_timeout()
     {
-        GetTree().ChangeScene("res://scenes/MainMenu.tscn");
         Global.CurrentLocation = Global.TargetLocation;
+        endFlight(FlightResult.SUCCEEDED, 1);
     }
 
     public void _on_AbortButton_pressed()
     {
-        GetTree().ChangeScene("res://scenes/MainMenu.tscn");
+        endFlight(FlightResult.ABORTED, 0);
+    }
+
+    public void _on_Player_HpChanged(int newHp)
+    {
+        if (newHp <= 0)
+        {
+            endFlight(FlightResult.FAILED, DEATH_EXPERIENCE_MULTIPLIER);
+        }
+    }
+
+    private void endFlight(FlightResult flightResult, int xpMultiplier)
+    {
+        Global.FlightResult = flightResult;
+        var game = GetNode<Game>("Game");
+        Global.EarnedExperience = (GetNode<Hud>("Game/Hud").GetEarnedExperience() + game.DestroyedObstacles) * xpMultiplier;
+        Global.Experience += Global.EarnedExperience;
+        if (flightResult != FlightResult.ABORTED)
+        {
+            Global.PickSuncakesUp(game.PickedUpSuncakes);
+        }
+        GetTree().ChangeScene("res://scenes/Metamorphosis.tscn");
     }
 }

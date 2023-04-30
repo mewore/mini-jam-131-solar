@@ -44,6 +44,12 @@ public class Game : Node2D
     private float obstacleX;
     private float maxObstacleY;
 
+    private int destroyedObstacles = 0;
+    public int DestroyedObstacles => destroyedObstacles;
+
+    private readonly HashSet<int> pickedUpSuncakes = new HashSet<int>();
+    public HashSet<int> PickedUpSuncakes => pickedUpSuncakes;
+
     public override void _Ready()
     {
         obstacleContainer = GetNode("Obstacles");
@@ -81,6 +87,7 @@ public class Game : Node2D
             if (suncake != null)
             {
                 suncake.Index = suncakeIndex;
+                suncake.Connect(nameof(Suncake.PickedUp), this, nameof(_on_Suncake_pickedUp));
             }
         }
         else
@@ -88,6 +95,21 @@ public class Game : Node2D
             GD.Print("Skipping creation of suncake!");
         }
         suncakeIndex++;
+    }
+
+    public void _on_Suncake_pickedUp(int index)
+    {
+        pickedUpSuncakes.Add(index);
+    }
+
+    private void linkObstacleDeath(Obstacle obstacle)
+    {
+        obstacle.Connect(nameof(Obstacle.Destroyed), this, nameof(_on_Obstacle_Destroyed));
+    }
+
+    public void _on_Obstacle_Destroyed()
+    {
+        ++destroyedObstacles;
     }
 
     private ScrollingObject createObject(PackedScene scene, int additionalSamples, Node container, float padding, float frequency, bool reverseSampling = false)
@@ -117,6 +139,7 @@ public class Game : Node2D
         if (createdObject is Obstacle)
         {
             (createdObject as Obstacle).TargetViewport = GetNode<Viewport>("Obstacles/Viewport");
+            linkObstacleDeath(createdObject as Obstacle);
         }
         container.AddChild(createdObject as Node);
         return createdObject;
