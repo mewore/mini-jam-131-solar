@@ -27,8 +27,11 @@
 - [x] 💙 Obstacles
 - [x] 💙 Suncake pickups
 - [x] 💙 Pickups are not encountered again if already picked up
-- [ ] 💙 Shoot to destroy obstacles
+- [x] 💙 Shoot to destroy obstacles
 - [ ] 💙 Go back when the player's HP reaches 0 - give XP
+- [ ] 💙 Show the currently travelled path
+- [ ] 💙 Show current location in the celestial map
+- [ ] 💙 Show intended travel destination info (distance, name, etc.)
 - [ ] 💙 Button that takes the player from the map scene to the upgrade scene (which is just )
 - [ ] 💙 Fire speed upgrade
 - [ ] 💙 Fire power upgrade
@@ -38,6 +41,9 @@
 
 ### Basic features
 
+- [ ] 💙 Show HP as bars
+- [ ] 💙 Proper feedback when hit (freeze for a moment, make the HP label flash)
+- [ ] 💙 Proper feedback and transition on death
 - [ ] 💙 Pause menu
 - [ ] 💙 Show some info when navigating in the celestial map
 - [ ] 💙 Limited ammo
@@ -54,6 +60,7 @@
 - [ ] 💛 Navigate to/from upgrade scene SFX
 - [ ] 💛 Teleport to beginning SFX
 - [ ] 💛 Clear level SFX
+- [ ] 💛 Take damage SFX
 - [ ] 💟 Publish `0.2.0`
 
 ### Advanced features
@@ -66,6 +73,7 @@
 - [ ] 💙 Reversing time (going to the last visited celestial body, reversing progress)
 - [ ] 💙💜 Level icons
 - [ ] 💛 Shoot SFX
+- [ ] 💛 Die SFX
 - [ ] 💛 Celestial map music
 - [ ] 💛 Upgrade scene music
 - [ ] 💛 Flight music

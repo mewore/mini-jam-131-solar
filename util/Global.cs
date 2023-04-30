@@ -46,6 +46,9 @@ public class Global : Node
     public static float DistanceToTarget = 60f;
 
     public static int MaxHp = 3;
+    public static int MaxAmmo = 20;
+    public static float ProjectilSpeed = 80f;
+    public static float ShootCooldown = .5f;
 
     public static string FlightId => CurrentLocation + " -> " + TargetLocation;
     private static Dictionary<string, HashSet<int>> pickedUpSuncakes = new Dictionary<string, HashSet<int>>();

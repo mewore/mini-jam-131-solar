@@ -7,6 +7,9 @@ public class Player : KinematicBody2D
     [Signal]
     public delegate void HpChanged(int newHp);
 
+    [Signal]
+    public delegate void AmmoChanged(int newHp);
+
 
     private Vector2 velocity = Vector2.Zero;
 
@@ -29,19 +32,39 @@ public class Player : KinematicBody2D
     private bool invulnerable = false;
     private int overlappingProjectiles = 0;
 
+    private float lastShotAt = -Mathf.Inf;
+
+    [Export]
+    private PackedScene projectileScene = null;
+
+    [Export]
+    private NodePath projectileContainer = null;
+    private Node projectileContainerNode;
+
+    private int ammoLeft = Global.MaxAmmo;
+    private readonly Vector2 bulletVelocity = Vector2.Right * Global.ProjectilSpeed;
+
     public override void _Ready()
     {
-        EmitSignal(nameof(HpChanged), hp);
         sprite = GetNode<Sprite>("Sprite");
+        projectileContainerNode = projectileContainer != null ? GetNode(projectileContainer) : GetParent();
+        if (projectileScene == null)
+        {
+            lastShotAt = Mathf.Inf;
+        }
     }
 
     public override void _Process(float delta)
     {
-        now += delta;
         if (invulnerable)
         {
             sprite.Visible = Mathf.Sin(now * Mathf.Pi / blinkTime) > 0f;
         }
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        now += delta;
     }
 
     public void Move(float delta, bool canControl = true)
@@ -57,6 +80,20 @@ public class Player : KinematicBody2D
 
         velocity = velocity.MoveToward(desiredVelocity, acceleration * delta);
         velocity = MoveAndSlide(velocity);
+    }
+
+    public void TryShoot()
+    {
+        if (now <= lastShotAt + Global.ShootCooldown || ammoLeft <= 0)
+        {
+            return;
+        }
+        EmitSignal(nameof(AmmoChanged), --ammoLeft);
+        lastShotAt = now;
+        var bullet = projectileScene.Instance<Projectile>();
+        bullet.Velocity = bulletVelocity;
+        bullet.Position = Position;
+        projectileContainerNode.AddChild(bullet);
     }
 
     public void _on_HarmArea_area_entered(Area2D area)

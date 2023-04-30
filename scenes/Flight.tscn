@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://environment/Game.cs" type="Script" id=1]
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://entities/obstacle/ObstacleBig.tscn" type="PackedScene" id=8]
 [ext_resource path="res://entities/suncake/Suncake.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/obstacle/obstacle-container-material.tres" type="Material" id=10]
+[ext_resource path="res://entities/projectile/PlayerProjectile.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 148 )
@@ -39,53 +40,8 @@ script = ExtResource( 1 )
 smallObstacleScene = ExtResource( 7 )
 obstacleScene = ExtResource( 6 )
 bigObstacleScene = ExtResource( 8 )
+obstacleFrequency = 1.0
 suncakeScene = ExtResource( 9 )
-
-[node name="Hud" type="CanvasLayer" parent="Game"]
-script = ExtResource( 3 )
-
-[node name="Polygon2D" type="Polygon2D" parent="Game/Hud"]
-color = Color( 0.121569, 0.113725, 0.12549, 1 )
-polygon = PoolVector2Array( 0, 0, 480, 0, 480, 32, 0, 32 )
-
-[node name="TimerOutline" type="Line2D" parent="Game/Hud"]
-position = Vector2( -3, 5 )
-points = PoolVector2Array( 0, 8, 480, 8 )
-default_color = Color( 0.0941176, 0.101961, 0.156863, 1 )
-
-[node name="TimerInner" type="Line2D" parent="Game/Hud/TimerOutline"]
-points = PoolVector2Array( 0, 8, 480, 8 )
-width = 5.0
-default_color = Color( 0.294118, 0.933333, 1, 1 )
-
-[node name="TimerLabel" type="Label" parent="Game/Hud"]
-margin_left = -3.0
-margin_top = 1.0
-margin_right = 477.0
-margin_bottom = 37.0
-theme = ExtResource( 4 )
-custom_colors/font_color = Color( 0.0196078, 0.913725, 1, 0.321569 )
-custom_constants/line_spacing = 5
-text = "Distance to destination (<FLIGHT_ID>):
-<TIME_LEFT> km"
-align = 1
-
-[node name="DestinationTimer" type="Timer" parent="Game/Hud"]
-one_shot = true
-
-[node name="RefreshTimer" type="Timer" parent="Game/Hud"]
-autostart = true
-
-[node name="HpLabel" type="Label" parent="Game/Hud"]
-margin_left = 2.0
-margin_top = 21.0
-margin_right = 150.0
-margin_bottom = 35.0
-theme = ExtResource( 4 )
-text = "HP: _/_"
-
-[node name="Player" parent="Game" instance=ExtResource( 2 )]
-position = Vector2( 54, 135 )
 
 [node name="Boundaries" type="StaticBody2D" parent="Game"]
 
@@ -121,7 +77,9 @@ autostart = true
 
 [node name="ObstacleNoise" type="Sprite" parent="Game/Obstacles"]
 self_modulate = Color( 1, 1, 1, 0.235294 )
+show_behind_parent = true
 z_index = -5
+z_as_relative = false
 texture = SubResource( 7 )
 centered = false
 
@@ -133,15 +91,80 @@ render_target_update_mode = 3
 
 [node name="CombinedObstacles" type="Sprite" parent="Game/Obstacles"]
 material = ExtResource( 10 )
-position = Vector2( 175, 36.5 )
-scale = Vector2( 2.04583, 2.32963 )
+position = Vector2( 240, 135 )
 texture = SubResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Pickups" type="Node2D" parent="Game"]
 
 [node name="SuncakeTimer" type="Timer" parent="Game/Pickups"]
 wait_time = 5.0
 autostart = true
+
+[node name="Player" parent="Game" instance=ExtResource( 2 )]
+position = Vector2( 54, 135 )
+projectileScene = ExtResource( 11 )
+projectileContainer = NodePath("../Projectiles")
+
+[node name="Projectiles" type="Node2D" parent="Game"]
+
+[node name="Hud" type="CanvasLayer" parent="Game"]
+script = ExtResource( 3 )
+warningColor = Color( 0.984314, 1, 0.388235, 1 )
+badColor = Color( 0.992157, 0.415686, 0.164706, 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Game/Hud"]
+color = Color( 0.121569, 0.113725, 0.12549, 1 )
+polygon = PoolVector2Array( 0, 0, 480, 0, 480, 32, 0, 32 )
+
+[node name="TimerOutline" type="Line2D" parent="Game/Hud"]
+position = Vector2( -3, 5 )
+points = PoolVector2Array( 0, 8, 480, 8 )
+default_color = Color( 0.0941176, 0.101961, 0.156863, 1 )
+
+[node name="TimerInner" type="Line2D" parent="Game/Hud/TimerOutline"]
+points = PoolVector2Array( 0, 8, 480, 8 )
+width = 5.0
+default_color = Color( 0.294118, 0.933333, 1, 1 )
+
+[node name="TimerLabel" type="Label" parent="Game/Hud"]
+margin_left = -3.0
+margin_top = 1.0
+margin_right = 477.0
+margin_bottom = 37.0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0.0196078, 0.913725, 1, 0.321569 )
+custom_constants/line_spacing = 5
+text = "Distance to destination (<FLIGHT_ID>):
+<TIME_LEFT> km"
+align = 1
+
+[node name="DestinationTimer" type="Timer" parent="Game/Hud"]
+one_shot = true
+
+[node name="RefreshTimer" type="Timer" parent="Game/Hud"]
+autostart = true
+
+[node name="AmmoLabel" type="Label" parent="Game/Hud"]
+modulate = Color( 1, 1, 1, 0.54902 )
+margin_left = 1.0
+margin_top = 21.0
+margin_right = 149.0
+margin_bottom = 35.0
+theme = ExtResource( 4 )
+text = "Ammo: _"
+
+[node name="HpLabel" type="Label" parent="Game/Hud"]
+modulate = Color( 1, 1, 1, 0.54902 )
+margin_left = 331.0
+margin_top = 21.0
+margin_right = 479.0
+margin_bottom = 35.0
+theme = ExtResource( 4 )
+text = "HP: _/_ "
+align = 2
 
 [node name="ButtonLayer" type="CanvasLayer" parent="."]
 
@@ -168,11 +191,12 @@ You don't keep any of the suncakes and you don't gain any experience."
 text = "Abort"
 flat = true
 
-[connection signal="timeout" from="Game/Hud/DestinationTimer" to="." method="_on_DestinationTimer_timeout"]
-[connection signal="timeout" from="Game/Hud/RefreshTimer" to="Game/Hud" method="_on_RefreshTimer_timeout"]
-[connection signal="HpChanged" from="Game/Player" to="Game/Hud" method="_on_Player_HpChanged"]
 [connection signal="timeout" from="Game/Obstacles/SmallObstacleCreationTimer2" to="Game" method="_on_SmallObstacleCreationTimer_timeout"]
 [connection signal="timeout" from="Game/Obstacles/ObstacleCreationTimer" to="Game" method="_on_ObstacleCreationTimer_timeout"]
 [connection signal="timeout" from="Game/Obstacles/BigObstacleCreationTimer3" to="Game" method="_on_BigObstacleCreationTimer_timeout"]
 [connection signal="timeout" from="Game/Pickups/SuncakeTimer" to="Game" method="_on_SuncakeTimer_timeout"]
+[connection signal="AmmoChanged" from="Game/Player" to="Game/Hud" method="_on_Player_AmmoChanged"]
+[connection signal="HpChanged" from="Game/Player" to="Game/Hud" method="_on_Player_HpChanged"]
+[connection signal="timeout" from="Game/Hud/DestinationTimer" to="." method="_on_DestinationTimer_timeout"]
+[connection signal="timeout" from="Game/Hud/RefreshTimer" to="Game/Hud" method="_on_RefreshTimer_timeout"]
 [connection signal="pressed" from="ButtonLayer/Buttons/HBoxContainer/AbortButton" to="." method="_on_AbortButton_pressed"]
