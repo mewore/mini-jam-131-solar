@@ -87,4 +87,9 @@ public class Player : KinematicBody2D
         EmitSignal(nameof(HpChanged), --hp);
         GetNode<Timer>("HarmCooldown").Start();
     }
+
+    public void GetPickup(Pickup pickup)
+    {
+        pickup.Disappear();
+    }
 }

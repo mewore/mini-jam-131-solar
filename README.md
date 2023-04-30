@@ -25,7 +25,8 @@
 - [x] 💙 The flight scene has a timer/distance meter, the length of which depends on the length of the path
 - [x] 💙 HP (replenished upon arrival)
 - [x] 💙 Obstacles
-- [ ] 💙 Suncake pickups
+- [x] 💙 Suncake pickups
+- [ ] 💙 Pickups are not encountered again if already picked up
 - [ ] 💙 Shoot to destroy obstacles
 - [ ] 💙 Go back when the player's HP reaches 0 - give XP
 - [ ] 💙 Button that takes the player from the map scene to the upgrade scene (which is just )
@@ -57,6 +58,7 @@
 
 ### Advanced features
 
+- [x] 💙 Obstacle outline (why...)
 - [ ] 💙 Firefly enemies
 - [ ] 💙💜 When the player reaches the sun, they can choose to explore it, leading to a special flight scene with story
 - [ ] 💜 Upgrade scene environment background
