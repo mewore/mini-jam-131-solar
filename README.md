@@ -55,7 +55,7 @@
 - [ ] 💜 Flight scene environment background
 - [ ] 💜 Celestial body sprite(s)
 - [ ] 💜 Projectile sprite
-- [ ] 💜 Obstacle (meteorite?) sprite
+- [x] 💜 Obstacle (meteorite?) sprite
 - [ ] 💜 Suncake sprite
 - [ ] 💛 Choose flight destination SFX
 - [ ] 💛 Navigate to/from upgrade scene SFX
