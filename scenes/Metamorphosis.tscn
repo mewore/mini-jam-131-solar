@@ -82,31 +82,38 @@ margin_right = 480.0
 margin_bottom = 117.0
 
 [node name="FireRate" type="Button" parent="Upgrades"]
-margin_right = 117.0
+margin_right = 96.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 text = "Fire rate"
 
 [node name="Firepower" type="Button" parent="Upgrades"]
-margin_left = 121.0
-margin_right = 243.0
+margin_left = 100.0
+margin_right = 201.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 text = "Firepower"
 
 [node name="Ammo" type="Button" parent="Upgrades"]
-margin_left = 247.0
-margin_right = 338.0
+margin_left = 205.0
+margin_right = 275.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 text = "Ammo"
 
 [node name="BulletSpeed" type="Button" parent="Upgrades"]
-margin_left = 342.0
-margin_right = 478.0
+margin_left = 279.0
+margin_right = 394.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 text = "Bullet speed"
+
+[node name="MaxHp" type="Button" parent="Upgrades"]
+margin_left = 398.0
+margin_right = 479.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "Max HP"
 
 [node name="UpgradeInfo" type="Label" parent="."]
 margin_top = 121.0

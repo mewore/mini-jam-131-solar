@@ -141,6 +141,7 @@ public class Metamorphosis : Control
             case "Firepower": return Global.FirepowerSkill;
             case "Ammo": return Global.AmmoSkill;
             case "BulletSpeed": return Global.BulletSpeedSkill;
+            case "MaxHp": return Global.MaxHpSkill;
             default:
                 GD.PushWarning("Unrecognized upgrade button name: " + button.Name);
                 return null;
@@ -158,7 +159,6 @@ public class Metamorphosis : Control
     private void UpdateXpText()
     {
         xpEarnedLabel.Text = xpEarnedTemplate.Replace("<XP_EARNED>", Global.EarnedExperience.ToString());
-        GD.Print(xpEarnedLabel.Text);
         upgradeQuestionLabel.Text = upgradeQuestionTemplate.Replace("<EXPERIENCE>", Global.Experience.ToString());
     }
 

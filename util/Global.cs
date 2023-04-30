@@ -90,11 +90,11 @@ public class Global : Node
     public static float DistanceToTarget = 15f;
     public static List<string> PastLocations = new List<string>();
 
-    private static readonly SkillDefinition FIRE_RATE_SKILL = new SkillDefinition(.5f, -.1f, 4, 50, 50);
+    private static readonly SkillDefinition FIRE_RATE_SKILL = new SkillDefinition(.5f, -.1f, 4, 100, 100);
     public static SkillState FireRateSkill = new SkillState(FIRE_RATE_SKILL, value => String.Format("{0:F2} sec / shot", value));
     public static float ShootCooldown => FireRateSkill.Value;
 
-    private static readonly SkillDefinition FIREPOWER_SKILL = new SkillDefinition(1f, 1f, 9, 150, 0);
+    private static readonly SkillDefinition FIREPOWER_SKILL = new SkillDefinition(1f, 1f, 9, 500, 0);
     public static SkillState FirepowerSkill = new SkillState(FIREPOWER_SKILL, value => String.Format("{0} damage / bullet", Mathf.RoundToInt(value)));
     public static float Damage => FirepowerSkill.Value;
 
@@ -106,7 +106,10 @@ public class Global : Node
     public static SkillState BulletSpeedSkill = new SkillState(BULLET_SPEED_SKILL, value => String.Format("{0} px / sec", Mathf.RoundToInt(value)));
     public static float ProjectileSpeed => BulletSpeedSkill.Value;
 
-    public static int MaxHp = 3;
+    private static readonly SkillDefinition MAX_HP_SKILL = new SkillDefinition(3f, 1f, 7, 100, 0);
+    public static SkillState MaxHpSkill = new SkillState(MAX_HP_SKILL, value => String.Format("{0} HP", Mathf.RoundToInt(value)));
+    public static int MaxHp => Mathf.RoundToInt(MaxHpSkill.Value);
+
     public static int Experience = OS.IsDebugBuild() ? 1000 : 0;
     public static int EarnedExperience = 0;
     public static bool SuncakeEaten = false;
