@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Metamorphosis : Control
 {
+    private const int DOUBLE_XP_COST = 3;
+
     private string xpEarnedTemplate;
     private Label xpEarnedLabel;
 
@@ -27,10 +29,10 @@ public class Metamorphosis : Control
             eatSuncakeButton.Disabled = true;
             eatSuncakeButton.Text = "Suncake eaten... delicious (x2 earned XP)";
         }
-        else if (Global.Suncakes <= 0)
+        else if (Global.Suncakes < DOUBLE_XP_COST)
         {
             eatSuncakeButton.Disabled = true;
-            eatSuncakeButton.Text = "No suncakes to eat";
+            eatSuncakeButton.Text = "Not enough suncakes to eat";
         }
         else if (Global.EarnedExperience <= 0)
         {
@@ -161,6 +163,7 @@ public class Metamorphosis : Control
     {
         Global.Experience += Global.EarnedExperience;
         Global.EarnedExperience *= 2;
+        Global.Suncakes -= DOUBLE_XP_COST;
         GetNode<Button>("EatSuncakeButton").Disabled = Global.SuncakeEaten = true;
         UpdateXpText();
     }

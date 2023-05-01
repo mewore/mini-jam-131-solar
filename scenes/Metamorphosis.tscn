@@ -54,12 +54,12 @@ align = 1
 autowrap = true
 
 [node name="EatSuncakeButton" type="Button" parent="."]
-margin_left = 138.0
+margin_left = 125.0
 margin_top = 34.0
-margin_right = 342.0
+margin_right = 355.0
 margin_bottom = 50.0
 size_flags_horizontal = 4
-text = "Eat a suncake (x2 earned XP)?"
+text = "Eat 3 suncakes for x2 earned XP?"
 
 [node name="Margin2" type="Control" parent="."]
 margin_top = 54.0

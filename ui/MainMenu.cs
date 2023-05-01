@@ -101,6 +101,16 @@ public class MainMenu : VBoxContainer
         GetNode<Button>("Options/MetamorphosisButton").Visible = Global.Experience > 0;
 
         journeyInfo = GetNode<JourneyInfo>("JourneyInfo");
+
+        Label winLabel = GetNode<Label>("WinText");
+        if (Global.CurrentLocation == "Sun")
+        {
+            winLabel.Text = winLabel.Text.Replace("<SUN_CAKES>", Global.Suncakes.ToString() + " suncake" + (Global.Suncakes == 1 ? "" : "s"));
+        }
+        else
+        {
+            winLabel.Visible = false;
+        }
     }
 
     public override void _Process(float delta)
