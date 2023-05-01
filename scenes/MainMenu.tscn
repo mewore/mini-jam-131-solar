@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/title-theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/Title.cs" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ui/map/Spiro.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/map/Geo.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/map/Bruto.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/map/GoHere.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
@@ -134,6 +135,7 @@ texture = ExtResource( 6 )
 position = Vector2( 457, 22 )
 
 [node name="Sprite" parent="CelestialBodies/Sun" index="0"]
+position = Vector2( -9, 0 )
 texture = ExtResource( 7 )
 
 [node name="Electro" parent="CelestialBodies" instance=ExtResource( 4 )]
@@ -167,7 +169,7 @@ position = Vector2( 302, 97 )
 position = Vector2( 415, 104 )
 
 [node name="Bruto #3" parent="CelestialBodies" instance=ExtResource( 13 )]
-position = Vector2( 415, 28 )
+position = Vector2( 356, 29 )
 
 [node name="Disco #2" parent="CelestialBodies" instance=ExtResource( 10 )]
 position = Vector2( 278, 138 )
@@ -195,6 +197,9 @@ position = Vector2( 196, 181 )
 
 [node name="YouAreHere" parent="." instance=ExtResource( 8 )]
 z_index = 1
+
+[node name="GoHere" parent="." instance=ExtResource( 14 )]
+position = Vector2( 448, 25 )
 
 [node name="JourneyInfo" parent="." instance=ExtResource( 9 )]
 visible = false

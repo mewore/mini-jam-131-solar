@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/main-menu-theme.tres" type="Theme" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "blink"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("LabelWrapper:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="YouAreHere" type="Node2D"]
+modulate = Color( 1, 1, 1, 0.541176 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 0, -12 )
+rotation = 3.14159
+polygon = PoolVector2Array( 0, -24, 6, -32, -6, -32 )
+
+[node name="LabelWrapper" type="Node2D" parent="."]
+position = Vector2( 0, -22 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Label" type="Label" parent="LabelWrapper"]
+margin_left = -68.0
+margin_top = 86.0
+margin_right = 68.0
+margin_bottom = 122.0
+theme = ExtResource( 1 )
+text = "Go here
+for
+DELICIOUS LIGHT"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "blink"
+anims/blink = SubResource( 1 )
