@@ -58,7 +58,7 @@
 - [x] 💜 Celestial body sprite(s)
 - [x] 💜 Projectile sprite
 - [x] 💜 Obstacle (meteorite?) sprite
-- [ ] 💜 Suncake sprite
+- [x] 💜 Suncake sprite
 - [ ] 💛 Choose flight destination SFX
 - [ ] 💛 Navigate to/from upgrade scene SFX
 - [ ] 💛 Teleport to beginning SFX
