@@ -143,7 +143,8 @@ public class Game : Node2D
         createdObject.Position = position;
         if (createdObject is Obstacle)
         {
-            (createdObject as Obstacle).TargetViewport = GetNode<Viewport>("Obstacles/Viewport");
+            // TODO: Find a way for this not to desync the positions of the sprites
+            // (createdObject as Obstacle).TargetViewport = GetNode<Viewport>("Obstacles/Viewport");
             linkObstacleDeath(createdObject as Obstacle);
         }
         container.AddChild(createdObject as Node);

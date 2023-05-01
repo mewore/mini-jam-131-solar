@@ -93,7 +93,7 @@ public class Player : KinematicBody2D
         EmitSignal(nameof(AmmoChanged), ammoLeft -= shots);
 
         lastShotAt = now;
-        if (shots == 0)
+        if (shots == 1)
         {
             shootAt(0f);
             return;

@@ -21,6 +21,11 @@ public class Flight : Node2D
         {
             endFlight(FlightResult.FAILED, DEATH_EXPERIENCE_MULTIPLIER);
         }
+        else
+        {
+            GetTree().Paused = true;
+            GetNode<Timer>("FreezeTimer").Start();
+        }
     }
 
     private void endFlight(FlightResult flightResult, int xpMultiplier)
@@ -39,5 +44,11 @@ public class Flight : Node2D
             Global.CurrentLocation = Global.TargetLocation;
         }
         GetTree().ChangeScene("res://scenes/Metamorphosis.tscn");
+    }
+
+    public void _on_FreezeTimer_timeout()
+    {
+        GetTree().Paused = false;
+        GetNode<Camera>("Camera2D").Shake();
     }
 }

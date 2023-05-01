@@ -47,7 +47,7 @@
 
 - [x] 💙 Turret upgrade
 - [x] 💙 Show HP as bars
-- [ ] 💙 Proper feedback when hit (freeze for a moment, make the HP label flash)
+- [x] 💙 Proper feedback when hit (freeze for a moment, make the HP label flash)
 - [ ] 💙 Proper feedback and transition on death
 - [ ] 💙 Pause menu
 - [ ] 💙 Show some info when navigating in the celestial map
