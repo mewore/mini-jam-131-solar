@@ -113,6 +113,10 @@ public class Global : Node
     public static SkillState MaxHpSkill = new SkillState(MAX_HP_SKILL, value => String.Format("{0} HP", Mathf.RoundToInt(value)));
     public static int MaxHp => Mathf.RoundToInt(MaxHpSkill.Value);
 
+    private static readonly SkillDefinition TURRET_SKILL = new SkillDefinition(1f, 1f, 4, 300, 0);
+    public static SkillState TurretSkill = new SkillState(TURRET_SKILL, value => String.Format("Shoot from {0} spot{1}", Mathf.RoundToInt(value), (value == 1 ? "" : "s")));
+    public static int NumTurrets => Mathf.RoundToInt(TurretSkill.Value);
+
     public static int Experience = OS.IsDebugBuild() ? 1000 : 0;
     public static int EarnedExperience = 0;
     public static bool SuncakeEaten = false;

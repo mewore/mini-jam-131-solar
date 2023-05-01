@@ -45,7 +45,7 @@
 
 ### Basic features
 
-- [ ] 💙 Turret upgrade
+- [x] 💙 Turret upgrade
 - [ ] 💙 Show HP as bars
 - [ ] 💙 Proper feedback when hit (freeze for a moment, make the HP label flash)
 - [ ] 💙 Proper feedback and transition on death

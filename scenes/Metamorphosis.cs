@@ -153,6 +153,7 @@ public class Metamorphosis : Control
             case "Ammo": return Global.AmmoSkill;
             case "BulletSpeed": return Global.BulletSpeedSkill;
             case "MaxHp": return Global.MaxHpSkill;
+            case "Turrets": return Global.TurretSkill;
             default:
                 GD.PushWarning("Unrecognized upgrade button name: " + button.Name);
                 return null;

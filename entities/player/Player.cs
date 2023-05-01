@@ -10,6 +10,7 @@ public class Player : KinematicBody2D
     [Signal]
     public delegate void AmmoChanged(int newHp);
 
+    private const float RADIUS = 16;
 
     private Vector2 velocity = Vector2.Zero;
 
@@ -88,11 +89,28 @@ public class Player : KinematicBody2D
         {
             return;
         }
-        EmitSignal(nameof(AmmoChanged), --ammoLeft);
+        int shots = Mathf.Min(ammoLeft, Global.NumTurrets);
+        EmitSignal(nameof(AmmoChanged), ammoLeft -= shots);
+
         lastShotAt = now;
+        if (shots == 0)
+        {
+            shootAt(0f);
+            return;
+        }
+        float yStep = RADIUS * 2 / (shots - 1);
+        float y = -RADIUS;
+        for (int index = 0; index < shots; index++, y += yStep)
+        {
+            shootAt(y);
+        }
+    }
+
+    private void shootAt(float y)
+    {
         var bullet = projectileScene.Instance<Projectile>();
         bullet.Velocity = bulletVelocity;
-        bullet.Position = Position;
+        bullet.Position = Position + Vector2.Down * y;
         projectileContainerNode.AddChild(bullet);
     }
 
