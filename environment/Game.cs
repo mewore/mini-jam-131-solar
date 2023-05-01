@@ -22,7 +22,7 @@ public class Game : Node2D
     private OpenSimplexNoise obstacleCreationNoise = null;
 
     [Export]
-    private float obstacleFrequency = .8f;
+    private float obstacleFrequency = 1f;
 
     [Export]
     private float obstacleMovementSpeed = 100f;
@@ -122,6 +122,7 @@ public class Game : Node2D
         var noiseRange = getNoiseRange(padding);
         float threshold = (noiseRange.Item1 + (noiseRange.Item2 - noiseRange.Item1) * (1f - frequency));
         Vector2 position = getRandomScrollingObjectPos(padding);
+        // TODO: Determine the offset properly
         Vector2 offset = Vector2.Right * now * obstacleMovementSpeed;
         float value = obstacleCreationNoise.GetNoise2dv(position + offset);
         if (reverseSampling ? (value > threshold) : (value < threshold))

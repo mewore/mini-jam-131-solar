@@ -176,6 +176,8 @@ public class MainMenu : VBoxContainer
                 Global.DistanceToTarget = (OS.IsDebugBuild() && false)
                     ? 15f
                     : currentBody.Position.DistanceTo(targetBody.Position);
+                Global.StartDanger = getDangerAt(currentBody.Position);
+                Global.TargetDanger = getDangerAt(targetBody.Position);
                 Global.EarnedExperience = 0;
                 Global.SuncakeEaten = false;
                 Global.FlightResult = FlightResult.ABORTED;
