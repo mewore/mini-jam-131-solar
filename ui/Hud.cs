@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class Hud : CanvasLayer
 {
@@ -36,7 +37,7 @@ public class Hud : CanvasLayer
         updateTimerText();
 
         hpLabel = GetNode<Label>("HpLabel");
-        hpLabel.Text = String.Format("HP: {0}/{1}", Global.MaxHp, Global.MaxHp);
+        hpLabel.Text = getHpText(Global.MaxHp);
         ammoLabel = GetNode<Label>("AmmoLabel");
         ammoLabel.Text = String.Format("Ammo: {0}", Global.MaxAmmo);
         defaultLabelOpacity = hpLabel.Modulate.a;
@@ -79,7 +80,7 @@ public class Hud : CanvasLayer
 
     public void _on_Player_HpChanged(int newHp)
     {
-        hpLabel.Text = String.Format("HP: {0}/{1}", newHp, Global.MaxHp);
+        hpLabel.Text = getHpText(newHp);
         hpLabel.Modulate = new Color(hpLabel.Modulate, 1f);
 
         if (newHp <= 1)
@@ -90,6 +91,20 @@ public class Hud : CanvasLayer
         {
             hpLabel.SelfModulate = warningColor;
         }
+    }
+
+    private string getHpText(int hp)
+    {
+        List<string> hpParts = new List<string>(Global.MaxHp);
+        for (int index = 0; index < hp; index++)
+        {
+            hpParts.Add("|||");
+        }
+        for (int index = hp; index < Global.MaxHp; index++)
+        {
+            hpParts.Add("...");
+        }
+        return String.Format("HP: {0}", String.Join(" ", hpParts));
     }
 
     public void _on_Player_AmmoChanged(int newAmmo)

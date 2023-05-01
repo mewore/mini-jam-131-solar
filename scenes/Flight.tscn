@@ -151,19 +151,19 @@ autostart = true
 modulate = Color( 1, 1, 1, 0.54902 )
 margin_left = 1.0
 margin_top = 21.0
-margin_right = 149.0
+margin_right = 177.0
 margin_bottom = 35.0
 theme = ExtResource( 4 )
 text = "Ammo: _"
 
 [node name="HpLabel" type="Label" parent="Game/Hud"]
 modulate = Color( 1, 1, 1, 0.54902 )
-margin_left = 331.0
+margin_left = 298.0
 margin_top = 21.0
-margin_right = 479.0
+margin_right = 477.0
 margin_bottom = 35.0
 theme = ExtResource( 4 )
-text = "HP: _/_ "
+text = "HP: ||| ||| ..."
 align = 2
 
 [node name="ButtonLayer" type="CanvasLayer" parent="."]
