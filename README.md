@@ -41,7 +41,7 @@
 - [x] 💙 Show how much a skill has been upgraded
 - [x] 💙 Difficulty / Danger
 - [x] 💙 When the Sun is reached, just say the player has won in the celestial map
-- [ ] 💟 Publish `0.1.0`
+- [x] 💟 Publish `0.1.0`
 
 ### Basic features
 
