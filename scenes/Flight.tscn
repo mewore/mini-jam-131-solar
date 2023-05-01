@@ -138,7 +138,7 @@ theme = ExtResource( 4 )
 custom_colors/font_color = Color( 0.0196078, 0.913725, 1, 0.321569 )
 custom_constants/line_spacing = 5
 text = "Distance to destination (<FLIGHT_ID>):
-<TIME_LEFT> km"
+<TIME_LEFT> Gm"
 align = 1
 
 [node name="DestinationTimer" type="Timer" parent="Game/Hud"]

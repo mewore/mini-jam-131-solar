@@ -6,6 +6,7 @@ public class Obstacle : Node2D, ScrollingObject
     [Signal]
     public delegate void Destroyed();
 
+    private const float MAX_SPEEDUP = .5f;
     public const float OBSTACLE_PADDING = 64;
     private const float SLOWDOWN_PER_HIT = .1f;
 
@@ -23,6 +24,7 @@ public class Obstacle : Node2D, ScrollingObject
     public override void _Ready()
     {
         var sprite = GetNode<Sprite>("Sprite");
+        sprite.FlipH = GD.Randf() > .5f;
         targetViewportSprite = sprite.Duplicate() as Sprite;
         targetViewportSprite.Position = Position;
         if (TargetViewport != null)

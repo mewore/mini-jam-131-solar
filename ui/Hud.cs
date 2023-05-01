@@ -5,6 +5,7 @@ public class Hud : CanvasLayer
 {
     private Label timerLabel;
     private Timer destinationTimer;
+    public float Completion => 1f - destinationTimer.TimeLeft / destinationTimer.WaitTime;
     private string timerTextTemplate;
     private string flightId = Global.FlightId;
 
@@ -64,7 +65,7 @@ public class Hud : CanvasLayer
 
     private void updateTimerLine()
     {
-        timerLine.Scale = new Vector2(1f - destinationTimer.TimeLeft / destinationTimer.WaitTime, timerLine.Scale.y);
+        timerLine.Scale = new Vector2(Completion, timerLine.Scale.y);
     }
 
     private void updateTimerText()

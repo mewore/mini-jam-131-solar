@@ -24,6 +24,19 @@ public class MainMenu : VBoxContainer
     private readonly Dictionary<string, Node2D> bodies = new Dictionary<string, Node2D>();
     private Node2D targetBody = null;
 
+    private readonly Vector2 dangerDiagonal = new Vector2(
+        (int)ProjectSettings.GetSetting("display/window/size/width"),
+         -(int)ProjectSettings.GetSetting("display/window/size/height")
+    );
+    private readonly Vector2 bottomLeft = new Vector2(0, (int)ProjectSettings.GetSetting("display/window/size/height"));
+    private float totalDanger;
+
+    [Export]
+    private Color easyColor = new Color(.2f, 1f, .7f);
+
+    [Export]
+    private Color hardColor = new Color(1f, .3f, .1f);
+
     public override void _Ready()
     {
         Global.LoadGameData();
@@ -99,13 +112,28 @@ public class MainMenu : VBoxContainer
         }
     }
 
+    private float getDangerAt(Vector2 position)
+    {
+        return (position - bottomLeft).Project(dangerDiagonal).Length() / dangerDiagonal.Length();
+    }
+
+    private float getInflatedDangerAt(Vector2 position)
+    {
+        float danger = Mathf.Lerp(.1f, 1f, getDangerAt(position));
+        return 1f - (1f - danger) * (1f - danger);
+    }
+
     private void updateTargetInfo()
     {
         float amount = Mathf.Ease(Mathf.Min((now - startedDisplayingTargetAt) / targetDisplayTime, 1f), targetDisplayEase);
         Vector2 position = currentBody.Position.LinearInterpolate(targetBody.Position, amount);
         flightLine.Points = new Vector2[] { currentBody.Position, position };
+        flightLine.Gradient.Colors = new Color[] {
+            easyColor.LinearInterpolate(hardColor, getInflatedDangerAt(currentBody.Position)),
+            easyColor.LinearInterpolate(hardColor, getInflatedDangerAt(position)),
+        };
         journeyInfo.Position = (currentBody.Position + position) * .5f;
-        journeyInfo.Update(targetBody.Name, currentBody.Position.DistanceTo(position));
+        journeyInfo.Update(targetBody.Name, currentBody.Position.DistanceTo(position), totalDanger);
         journeyInfo.Modulate = new Color(journeyInfo.Modulate, amount);
     }
 
@@ -121,13 +149,23 @@ public class MainMenu : VBoxContainer
                 if (targetBody != null)
                 {
                     startedDisplayingTargetAt = now;
+                    float dangerDiagonalLength = dangerDiagonal.Length();
+                    float distance = currentBody.Position.DistanceTo(targetBody.Position);
+                    float danger1 = getInflatedDangerAt(currentBody.Position);
+                    float danger2 = getInflatedDangerAt(targetBody.Position);
+                    totalDanger = 1f - Mathf.Pow(1f - Mathf.Sqrt(danger1 * danger2), 3f * distance / dangerDiagonalLength);
+                    // Artificially inflate the danger
+                    // totalDanger = 1f - (1f - totalDanger) * (1f - totalDanger);
+                    journeyInfo.TextColor = easyColor.LinearInterpolate(hardColor, totalDanger);
                 }
             }
             if (@event.IsActionPressed("ui_navigate") && targetBody != null)
             {
                 // TODO: Autosave
                 Global.TargetLocation = targetBody.Name;
-                Global.DistanceToTarget = currentBody.Position.DistanceTo(targetBody.Position);
+                Global.DistanceToTarget = (OS.IsDebugBuild() && false)
+                    ? 15f
+                    : currentBody.Position.DistanceTo(targetBody.Position);
                 Global.EarnedExperience = 0;
                 Global.SuncakeEaten = false;
                 Global.FlightResult = FlightResult.ABORTED;

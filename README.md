@@ -39,7 +39,7 @@
 - [x] 💙 Bullet speed upgrade
 - [x] 💙 Max HP upgrade
 - [x] 💙 Show how much a skill has been upgraded
-- [ ] 💙 Difficulty
+- [x] 💙 Difficulty / Danger
 - [ ] 💙 When the Sun is reached, just say the player has won in the celestial map
 - [ ] 💟 Publish `0.1.0`
 

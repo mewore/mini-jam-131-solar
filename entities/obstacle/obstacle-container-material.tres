@@ -17,6 +17,14 @@ void fragment() {
         bool right_alpha = texture(TEXTURE, texcoord + vec2(pixel_size.x, 0)).a > 0.5;
         bool top_alpha = texture(TEXTURE, texcoord + vec2(0, -pixel_size.y)).a > 0.5;
         bool bottom_alpha = texture(TEXTURE, texcoord + vec2(0, pixel_size.y)).a > 0.5;
+        bottom_alpha = bottom_alpha || texture(TEXTURE, texcoord + vec2(0, 2.0 * pixel_size.y)).a > 0.5;
+        bottom_alpha = bottom_alpha || texture(TEXTURE, texcoord + vec2(0, -2.0 * pixel_size.y)).a > 0.5;
+        bottom_alpha = bottom_alpha || texture(TEXTURE, texcoord + vec2(2.0 * pixel_size.x, 0)).a > 0.5;
+        bottom_alpha = bottom_alpha || texture(TEXTURE, texcoord + vec2(-2.0 * pixel_size.x, 0)).a > 0.5;
+        bottom_alpha = bottom_alpha || texture(TEXTURE, texcoord + vec2(0, 3.0 * pixel_size.y)).a > 0.5;
+        bottom_alpha = bottom_alpha || texture(TEXTURE, texcoord + vec2(0, -3.0 * pixel_size.y)).a > 0.5;
+        bottom_alpha = bottom_alpha || texture(TEXTURE, texcoord + vec2(3.0 * pixel_size.x, 0)).a > 0.5;
+        bottom_alpha = bottom_alpha || texture(TEXTURE, texcoord + vec2(-3.0 * pixel_size.x, 0)).a > 0.5;
 
         // If the current pixel is transparent and has an opaque neighbor, draw the outline
         if (left_alpha || right_alpha || top_alpha || bottom_alpha) {

@@ -18,7 +18,7 @@ public class Player : KinematicBody2D
     private float acceleration = 1000.0f;
 
     [Export]
-    private float maxSpeed = 100.0f;
+    private float maxSpeed = 110.0f;
 
     [Export(PropertyHint.Range, "(0,1)")]
     private float sneakSpeed = .5f;

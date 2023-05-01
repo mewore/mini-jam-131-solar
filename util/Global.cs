@@ -89,6 +89,8 @@ public class Global : Node
     public static string CurrentLocation = "Earth";
     public static string TargetLocation = CurrentLocation;
     public static float DistanceToTarget = 15f;
+    public static float StartDanger = 0f;
+    public static float TargetDanger = 1f;
     public static List<string> PastLocations = new List<string>();
 
     private static readonly SkillDefinition FIRE_RATE_SKILL = new SkillDefinition(.5f, -.1f, 4, 100, 100);

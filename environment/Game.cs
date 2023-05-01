@@ -22,7 +22,7 @@ public class Game : Node2D
     private OpenSimplexNoise obstacleCreationNoise = null;
 
     [Export]
-    private float obstacleFrequency = .3f;
+    private float obstacleFrequency = .8f;
 
     [Export]
     private float obstacleMovementSpeed = 100f;
@@ -50,6 +50,10 @@ public class Game : Node2D
     private readonly HashSet<int> pickedUpSuncakes = new HashSet<int>();
     public HashSet<int> PickedUpSuncakes => pickedUpSuncakes;
 
+    private Hud hud;
+
+    private float Danger => Mathf.Lerp(Global.StartDanger, Global.TargetDanger, hud.Completion);
+
     public override void _Ready()
     {
         obstacleContainer = GetNode("Obstacles");
@@ -58,6 +62,7 @@ public class Game : Node2D
         int seed = Global.FlightId.GetHashCode();
         obstacleCreationNoise.Seed = seed;
         pickupContainer = GetNode("Pickups");
+        hud = GetNode<Hud>("Hud");
     }
 
     private (float, float) getNoiseRange(float padding)
@@ -76,9 +81,9 @@ public class Game : Node2D
         return (min, max);
     }
 
-    public void _on_SmallObstacleCreationTimer_timeout() => createObject(smallObstacleScene, 1, obstacleContainer, Obstacle.OBSTACLE_PADDING, obstacleFrequency);
-    public void _on_ObstacleCreationTimer_timeout() => createObject(obstacleScene, 2, obstacleContainer, Obstacle.OBSTACLE_PADDING, obstacleFrequency);
-    public void _on_BigObstacleCreationTimer_timeout() => createObject(bigObstacleScene, 8, obstacleContainer, Obstacle.OBSTACLE_PADDING, obstacleFrequency);
+    public void _on_SmallObstacleCreationTimer_timeout() => createObject(smallObstacleScene, 1, obstacleContainer, Obstacle.OBSTACLE_PADDING, obstacleFrequency * Danger);
+    public void _on_ObstacleCreationTimer_timeout() => createObject(obstacleScene, 2, obstacleContainer, Obstacle.OBSTACLE_PADDING, obstacleFrequency * Danger);
+    public void _on_BigObstacleCreationTimer_timeout() => createObject(bigObstacleScene, 8, obstacleContainer, Obstacle.OBSTACLE_PADDING, obstacleFrequency * Danger);
     public void _on_SuncakeTimer_timeout()
     {
         if (!Global.IsSuncakePickedUp(suncakeIndex))
@@ -134,7 +139,7 @@ public class Game : Node2D
             }
         }
         var createdObject = scene.Instance<ScrollingObject>();
-        createdObject.ScrollSpeed = obstacleMovementSpeed;
+        createdObject.ScrollSpeed = obstacleMovementSpeed * Mathf.Lerp(1f, 2f, Danger);
         createdObject.Position = position;
         if (createdObject is Obstacle)
         {
