@@ -50,7 +50,7 @@
 - [x] 💙 Proper feedback when hit (freeze for a moment, make the HP label flash)
 - [ ] 💙 Proper feedback and transition on death
 - [ ] 💙 Pause menu
-- [ ] 💙 Show some info when navigating in the celestial map
+- [x] 💙 Show some info when navigating in the celestial map
 - [x] 💙 Limited ammo
 - [ ] 💙 Auto-saving/auto-loading
 - [ ] 💜 Celestial map environment background
