@@ -56,7 +56,7 @@
 - [ ] 💜 Celestial map environment background
 - [ ] 💜 Flight scene environment background
 - [x] 💜 Celestial body sprite(s)
-- [ ] 💜 Projectile sprite
+- [x] 💜 Projectile sprite
 - [x] 💜 Obstacle (meteorite?) sprite
 - [ ] 💜 Suncake sprite
 - [ ] 💛 Choose flight destination SFX
