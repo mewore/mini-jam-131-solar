@@ -46,6 +46,7 @@ public class MainMenu : VBoxContainer
         flightLine = flightLineContainer.GetNode<Line2D>("FlightLine");
         foreach (Node2D body in GetNode("CelestialBodies").GetChildren())
         {
+            GD.Print("Adding: " + body.Name);
             bodies[body.Name] = body;
         }
         currentBody = bodies.ContainsKey(Global.CurrentLocation) ? bodies[Global.CurrentLocation] : null;

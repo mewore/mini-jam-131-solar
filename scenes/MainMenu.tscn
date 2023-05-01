@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/title-theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/Title.cs" type="Script" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://ui/map/sun.png" type="Texture" id=7]
 [ext_resource path="res://ui/map/YouAreHere.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/map/JourneyInfo.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/map/Disco.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/map/Spiro.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ui/map/Geo.tscn" type="PackedScene" id=12]
+[ext_resource path="res://ui/map/Bruto.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
@@ -73,25 +77,24 @@ texture = SubResource( 3 )
 
 [node name="Title" type="Label" parent="."]
 margin_right = 480.0
-margin_bottom = 51.0
+margin_bottom = 24.0
 theme = ExtResource( 1 )
 custom_colors/font_color = Color( 0.831373, 0.443137, 0.364706, 1 )
-text = "Title
-Title2"
+text = "Title"
 align = 1
 script = ExtResource( 2 )
 
 [node name="WinText" type="Label" parent="."]
-margin_top = 55.0
+margin_top = 28.0
 margin_right = 480.0
-margin_bottom = 91.0
+margin_bottom = 64.0
 text = "Arrived!
 You have <SUN_CAKES> to give to the Sun residents
 c:"
 align = 1
 
 [node name="Margin" type="Control" parent="."]
-margin_top = 95.0
+margin_top = 68.0
 margin_right = 480.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 0, 10 )
@@ -133,56 +136,62 @@ position = Vector2( 457, 22 )
 [node name="Sprite" parent="CelestialBodies/Sun" index="0"]
 texture = ExtResource( 7 )
 
-[node name="CelestialBody" parent="CelestialBodies" instance=ExtResource( 4 )]
+[node name="Electro" parent="CelestialBodies" instance=ExtResource( 4 )]
 position = Vector2( 110, 244 )
 
-[node name="CelestialBody2" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 22, 188 )
+[node name="Electro #2" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 221, 234 )
 
-[node name="CelestialBody3" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 73, 124 )
+[node name="Electro #3" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 326, 173 )
 
-[node name="CelestialBody4" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 195, 183 )
+[node name="Electro #4" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 133, 87 )
 
-[node name="CelestialBody5" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 128, 21 )
+[node name="Electro #5" parent="CelestialBodies" instance=ExtResource( 4 )]
+position = Vector2( 453, 194 )
 
-[node name="CelestialBody6" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 269, 154 )
+[node name="Spiro" parent="CelestialBodies" instance=ExtResource( 11 )]
+position = Vector2( 164, 29 )
 
-[node name="CelestialBody7" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 355, 246 )
+[node name="Spiro #2" parent="CelestialBodies" instance=ExtResource( 11 )]
+position = Vector2( 62, 37 )
 
-[node name="CelestialBody8" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 433, 224 )
+[node name="Spiro #3" parent="CelestialBodies" instance=ExtResource( 11 )]
+position = Vector2( 302, 241 )
 
-[node name="CelestialBody9" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 370, 165 )
+[node name="Bruto" parent="CelestialBodies" instance=ExtResource( 13 )]
+position = Vector2( 302, 97 )
 
-[node name="CelestialBody10" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 430, 106 )
+[node name="Bruto #2" parent="CelestialBodies" instance=ExtResource( 13 )]
+position = Vector2( 415, 104 )
 
-[node name="CelestialBody11" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 353, 33 )
+[node name="Bruto #3" parent="CelestialBodies" instance=ExtResource( 13 )]
+position = Vector2( 415, 28 )
 
-[node name="CelestialBody12" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 286, 205 )
+[node name="Disco #2" parent="CelestialBodies" instance=ExtResource( 10 )]
+position = Vector2( 278, 138 )
+rotation = 0.0547688
 
-[node name="CelestialBody13" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 212, 105 )
+[node name="Disco #3" parent="CelestialBodies" instance=ExtResource( 10 )]
+position = Vector2( 359, 222 )
+rotation = 0.0547688
 
-[node name="CelestialBody14" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 51, 57 )
+[node name="Disco" parent="CelestialBodies" instance=ExtResource( 10 )]
+position = Vector2( 26, 109 )
+rotation = 0.0547688
 
-[node name="CelestialBody15" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 190, 246 )
+[node name="Geo" parent="CelestialBodies" instance=ExtResource( 12 )]
+position = Vector2( 112, 185 )
 
-[node name="CelestialBody16" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 309, 163 )
+[node name="Geo #2" parent="CelestialBodies" instance=ExtResource( 12 )]
+position = Vector2( 30, 192 )
 
-[node name="CelestialBody17" parent="CelestialBodies" instance=ExtResource( 4 )]
-position = Vector2( 309, 163 )
+[node name="Geo #3" parent="CelestialBodies" instance=ExtResource( 12 )]
+position = Vector2( 180, 102 )
+
+[node name="Geo #4" parent="CelestialBodies" instance=ExtResource( 12 )]
+position = Vector2( 196, 181 )
 
 [node name="YouAreHere" parent="." instance=ExtResource( 8 )]
 z_index = 1

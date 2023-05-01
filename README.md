@@ -55,7 +55,7 @@
 - [ ] 💙 Auto-saving/auto-loading
 - [ ] 💜 Celestial map environment background
 - [ ] 💜 Flight scene environment background
-- [ ] 💜 Celestial body sprite(s)
+- [x] 💜 Celestial body sprite(s)
 - [ ] 💜 Projectile sprite
 - [x] 💜 Obstacle (meteorite?) sprite
 - [ ] 💜 Suncake sprite
